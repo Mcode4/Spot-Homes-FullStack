@@ -1,6 +1,8 @@
+import { csrfFetch } from "./csrf"
+
 const LOAD_SPOTS = 'spot/loadSpots'
 const LOAD_SPOTDATA = 'spot/loadSpotData'
-
+const LOAD_CURRDATA = 'spot/loadCurrData'
 const EDIT_SPOT = 'spot/editSpot'
 const CREATE_SPOT = 'spot/newSpot'
 const REMOVE_SPOT = 'spot/removeSpot'
@@ -18,6 +20,13 @@ const loadSpotDataAction = (action)=>{
         payload: action
     }
 }
+const loadCurrDataAction = (action)=>{
+    return {
+        type: LOAD_CURRDATA,
+        payload: action
+    }
+}
+
 const editSpotAction = (action)=>{
     return{
         type: EDIT_SPOT,
@@ -41,8 +50,6 @@ const removeSpotAction = (action)=>{
 export const loadSpots = () => async (dispatch)=>{
     const res = await fetch(`/api/spots`)
     const data = await res.json()
-    const spots = data.Spots
-
     dispatch(loadSpotsAction(data))
     return res
 }
@@ -67,8 +74,15 @@ export const loadSpotData = (spotId) => async (dispatch) =>{
     return res && res2
 }
 
+export const loadCurrentSpots = () => async(dispatch)=>{
+    const res = await fetch('/api/spots/current')
+    const data = await res.json()
+    dispatch(loadCurrDataAction(data))
+    return res
+  }
+
 //Reducer
-const initialState = {spots: [], data: [] }
+const initialState = {spots: [], spotData: [], currData: [] }
 // const initialState = {spots: null, details: {reviews: [], images:[]}}
 
 const spotReducer = (state = initialState, action) =>{
@@ -76,7 +90,9 @@ const spotReducer = (state = initialState, action) =>{
         case LOAD_SPOTS:
             return {...state, spots: action.payload}
         case LOAD_SPOTDATA:
-            return {...state, data: action.payload}
+            return {...state, spotData: action.payload}
+        case LOAD_CURRDATA:
+            return {...state, currData: action.payload}
         case EDIT_SPOT:
             return {...state, spots: state.spots.map((spot)=>
                     spot.id === action.payload.id ? {...spot, ...action.payload} : spot

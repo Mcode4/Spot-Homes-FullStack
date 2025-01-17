@@ -1,3 +1,15 @@
+.hText{
+    font-size: 24pt;
+    font-weight: bold;
+}
+.shText{
+    font-size: 18pt;
+    font-weight: bold;
+}
+.nText{
+    font-size: 14pt;
+}
+
 #page{
     height: 100%;
     width: 100%;
@@ -11,8 +23,6 @@
 header{
     justify-self: self-start;
 }
-
-
 
 /* Pictures */
 #s1{

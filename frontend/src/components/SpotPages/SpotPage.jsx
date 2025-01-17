@@ -15,8 +15,8 @@ function SpotPage(){
     const state = useSelector(state=> state.spot)
 
     const spot = state.spots.Spots[id-1]
-    const spotData = state.data.spotData
-    const reviewData = state.data.reviewData
+    const spotData = state.spotData.spotData
+    const reviewData = state.spotData.reviewData
 
     if(!spot.displayRating){
         const string = `${spot.avgRating}`
@@ -61,8 +61,8 @@ function SpotPage(){
     return(
         <div id="page">
             <header>
-                <div>{spot.name}</div>
-                <div>{`${spot.city}, ${spot.state}, ${spot.country}`}</div>
+                <div className="hText">{spot.name}</div>
+                <div className="nText">{`${spot.city}, ${spot.state}, ${spot.country}`}</div>
             </header>
             <section id="s1">
                 <div id="mPic">
@@ -78,14 +78,14 @@ function SpotPage(){
 
             <section id="s2">
                 <div>
-                    <div>Hosted by {`${spotData.Owner.firstName} ${spotData.Owner.lastName}`}</div>
-                    <div>{spot.description}</div>
+                    <div className="hText">Hosted by {`${spotData.Owner.firstName} ${spotData.Owner.lastName}`}</div>
+                    <div className="nText">{spot.description}</div>
                 </div>
 
                 <div className="popupDisplay">
                     <div className="popupInfo">
-                        <div id="price">${spot.price} a night</div>
-                        <div id="rating">★{spot.displayRating}</div>
+                        <div id="price" className="hText">${spot.price} a night</div>
+                        <div id="rating" className="shText">★{spot.displayRating}</div>
                     </div>
                     <button id="reserve">Reserve</button>
                 </div>
@@ -93,15 +93,15 @@ function SpotPage(){
         
             <section id="s3">
                 <div>
-                    <div>★{spot.displayRating}</div>
-                    <div>{reviewStatement}</div>
+                    <div className="hText">★{spot.displayRating}</div>
+                    <div className="hText">{reviewStatement}</div>
                 </div>
                 <div>
                     {reviewData.Reviews.map((review)=> (
                         <div id="review" key={review.id}>
-                            <div id="rName">rName- {review.User.firstName}</div>
-                            <div id="rDate">rData- {review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
-                            <div id="rComment">rComment- {review.review}</div>
+                            <div id="rName" className="shText">rName- {review.User.firstName}</div>
+                            <div id="rDate" className="nText">rData- {review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
+                            <div id="rComment" className="nText">rComment- {review.review}</div>
                         </div>
                     ))}
                 </div>

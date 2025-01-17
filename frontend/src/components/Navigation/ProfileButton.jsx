@@ -5,6 +5,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 
 function ProfileButton({ user }) {
@@ -49,9 +50,12 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
+            {/* <li>Hello {user.username}</li> */}
+            <li>Hello, {user.firstName}</li> {/*{user.lastName}*/}
             <li>{user.email}</li>
+            <button>
+              <NavLink to={'/spots/current'}>Manage Spots</NavLink>
+            </button>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

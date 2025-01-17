@@ -1,7 +1,7 @@
 #Navigations{
     height: 25px;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr 1fr;
     border-bottom: 2px solid black;
 }
 
@@ -12,6 +12,11 @@
     list-style-type: none;
 }
 
+#left-justified{
+    display: inline-flex;
+    justify-items: flex-end;
+}
+
 /* Profile Button */
 #profileDiv{
     height: 100%;
@@ -19,7 +24,7 @@
     justify-items: center;
 }
 
-ul > li{
+li{
     list-style-type: none;
     width: 100%;
 }
