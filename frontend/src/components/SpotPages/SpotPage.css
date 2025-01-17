@@ -1,0 +1,82 @@
+#page{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 125px 325px 250px fit-content;
+    gap: 10px;
+    justify-items: center;
+}
+
+/* Top Page Header */
+header{
+    justify-self: self-start;
+}
+
+
+
+/* Pictures */
+#s1{
+    display: grid;
+    grid-template-columns: 325px 325px;
+}
+#mPic{
+    align-items: center;
+    justify-items: center;
+    padding: 10px;
+}
+#oPic{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    padding: 10px;
+}
+
+.bigImg{
+    height: 300px;
+    width: 300px;
+    object-fit: fill;
+}
+.smallImg{
+    height: 145px;
+    width: 145px;
+    object-fit: fill;
+}
+
+/* Spot Description */
+#s2{
+    width: 100%;
+    justify-self: self-start;
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+}
+.popupInfo{
+    align-content: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#price{
+    justify-self: self-start;
+}
+#rating{
+    justify-self: self-end;
+}
+#reserve{
+    width: 100%;
+}
+
+.popupDisplay{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* Reviews */
+#s3{
+    width: 100%;
+    justify-self: self-start;
+    display: grid;
+    grid-template-rows: 100px fit-content;
+}

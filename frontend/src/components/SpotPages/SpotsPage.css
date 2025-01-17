@@ -1,0 +1,27 @@
+#holder{
+    display: grid;
+    grid-template-columns: 150px 150px 150px 150px;
+    /* column-gap: 30px;
+    row-gap: 10px; */
+    gap: 20px;
+    justify-content: center;
+}
+.container{
+    background-color: transparent;
+    border: none;
+}
+.container:hover{
+    cursor: pointer;
+    background-color: gray;
+    color: #FFFF;
+    justify-items: center;
+}
+.imgHolder{
+    justify-self: center;
+    
+}
+.img{
+    height: 100px;
+    width: 150px;
+    object-fit: fill;
+}

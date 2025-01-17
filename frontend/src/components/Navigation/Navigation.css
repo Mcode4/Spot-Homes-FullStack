@@ -1,0 +1,34 @@
+#Navigations{
+    height: 25px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    border-bottom: 2px solid black;
+}
+
+#home{
+    list-style-type: none;
+}
+#profile{
+    list-style-type: none;
+}
+
+/* Profile Button */
+#profileDiv{
+    height: 100%;
+    width: 100%;
+    justify-items: center;
+}
+
+ul > li{
+    list-style-type: none;
+    width: 100%;
+}
+
+.visible{
+    display: flex;
+    visibility: visible;
+}
+.hidden{
+    display: flex;
+    visibility: hidden;
+}

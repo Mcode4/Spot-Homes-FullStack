@@ -1,25 +1,42 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import * as sessionActions from './store/session';
+import * as spotActions from "./store/spot";
 import Navigation from './components/Navigation';
+import SpotsPage from './components/SpotPages';
+import SpotPage from './components/SpotPages/SpotPage';
 
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const loadFunc = async()=>{
+    await dispatch(spotActions.loadSpots())
+    await dispatch(sessionActions.restoreUser())
+    return console.log('load complete')
+  }
+
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => {
+    loadFunc().then(() => {
       setIsLoaded(true)
     });
   }, [dispatch]);
 
-  return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && <Outlet />}
-    </>
-  );
+  if(isLoaded){
+      return (
+      <>
+        <Navigation isLoaded={isLoaded} />
+        {isLoaded && <Outlet />}
+      </>
+    );
+  } else {
+    return (
+      <>
+        <h1>Page Loading</h1>
+      </>
+    )
+  }
 }
 
 const router = createBrowserRouter([
@@ -28,8 +45,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>
+        element: <SpotsPage />
       },
+      {
+        path: '/spots/:id',
+        element: <SpotPage />
+      }
     ]
   }
 ]);
