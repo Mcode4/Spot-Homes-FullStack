@@ -12,11 +12,12 @@
 
 #page{
     height: 100%;
-    width: 100%;
+    width: 1000px;
     display: grid;
-    grid-template-rows: 125px 325px 250px fit-content;
+    grid-template-rows: 125px 375px 250px fit-content;
     gap: 10px;
     justify-items: center;
+    justify-self: center;
 }
 
 /* Top Page Header */
@@ -27,7 +28,9 @@ header{
 /* Pictures */
 #s1{
     display: grid;
-    grid-template-columns: 325px 325px;
+    grid-template-columns: 500px 500px;
+    align-items: center;
+    justify-items: center;
 }
 #mPic{
     align-items: center;
@@ -38,18 +41,18 @@ header{
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    justify-items: center;
     padding: 10px;
+    gap: 10px;
 }
 
 .bigImg{
-    height: 300px;
-    width: 300px;
+    height: fit-content;
+    width: 450px;
     object-fit: fill;
 }
 .smallImg{
     height: 145px;
-    width: 145px;
+    width: 225px;
     object-fit: fill;
 }
 
@@ -89,4 +92,8 @@ header{
     justify-self: self-start;
     display: grid;
     grid-template-rows: 100px fit-content;
+}
+
+#review{
+    justify-items: start;
 }
