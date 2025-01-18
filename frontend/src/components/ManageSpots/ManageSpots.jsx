@@ -6,11 +6,17 @@ import * as spotActions from '../../store/spot'
 function ManageSpots(){
     const dispatch = useDispatch()
 
-    const userSpots = useSelector(state => state.spot.currData.Spots)
-
     useEffect(()=>{
         dispatch(spotActions.loadCurrentSpots())
     }, [dispatch])
+
+    const userSpots = useSelector(state => state.spot.currData.Spots)
+
+    if(!userSpots){
+        return (
+            <h1>Page Loading...</h1>
+        )
+    }
 
     return (
         <div id="ManagePage">
