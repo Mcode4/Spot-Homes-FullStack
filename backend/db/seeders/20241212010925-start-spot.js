@@ -21,6 +21,58 @@ const spotData = [
     price:150
   },
   {
+    // ownerId:1,
+    userName: 'Demo-lition',
+    address:'1111 Apt-A',
+    city:'Los Angeles',
+    state:'CA',
+    country:'US',
+    lat:35,
+    lng:-120,
+    name:'Apartment Suite',
+    description:'transportion is excluded',
+    price:95
+  },
+  {
+    // ownerId:1,
+    userName: 'Demo-lition',
+    address:'1112 St.',
+    city:'Los Angeles',
+    state:'CA',
+    country:'US',
+    lat:34,
+    lng:-119,
+    name:'Condo House',
+    description:'transportion is excluded',
+    price:95
+  },
+  {
+    // ownerId:1,
+    userName: 'FakeUser2',
+    address:'3333 BBQ Spot Park',
+    city:'Austin',
+    state:'TX',
+    country:'US',
+    lat:30,
+    lng:-110,
+    name:'Spot for BBQ',
+    description:'transportion is excluded',
+    price:200
+  },
+  {
+    // ownerId:1,
+    userName: 'FakeUser2',
+    address:'1113 St.',
+    city:'New York City',
+    state:'NY',
+    country:'US',
+    lat:40,
+    lng:-130,
+    name:'Full House',
+    description:'transportion is excluded',
+    price:350
+  },
+  {
     // ownerId:2,
     userName: 'FakeUser1',
     address:'moon',

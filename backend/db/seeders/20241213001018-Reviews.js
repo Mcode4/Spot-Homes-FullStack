@@ -29,6 +29,43 @@ const reviewData = [
     // spotId:1,
     review: 'not like it',
     stars: 5
+  },
+  {
+    // spotId: 1,
+    name:'mars hotel',
+    username: 'Demo-lition',
+    review: "Great",
+    stars: 5
+  },
+  {
+    // userId:1,
+    username: 'Demo-lition',
+    name:'Full House',
+    // spotId:2,
+    review: 'like it',
+    stars: 3
+  },
+  {
+    // spotId: 1,
+    name:'Spot for BBQ',
+    username: 'Demo-lition',
+    review: "Great",
+    stars: 5
+  },
+  {
+    // userId:1,
+    username: 'Demo-lition',
+    name:'Condo House',
+    // spotId:2,
+    review: 'like it',
+    stars: 3
+  },
+  {
+    // spotId: 1,
+    name:'Apartment Suite',
+    username: 'Demo-lition',
+    review: "Great",
+    stars: 5
   }
  ]
 

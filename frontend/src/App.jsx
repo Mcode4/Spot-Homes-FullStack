@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import * as sessionActions from './store/session';
-import * as spotActions from "./store/spot";
+// import * as spotActions from "./store/spot";
 import Navigation from './components/Navigation';
 import SpotsPage from './components/SpotPages';
 import SpotPage from './components/SpotPages/SpotPage';
@@ -13,16 +13,12 @@ function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const loadFunc = async()=>{
-    await dispatch(spotActions.loadSpots())
-    await dispatch(sessionActions.restoreUser())
-    return console.log('load complete')
-  }
+  // const loadFunc = async()=>{}
 
   useEffect(() => {
-    loadFunc().then(() => {
+    dispatch(sessionActions.restoreUser()).then(() => {
       setIsLoaded(true)
-    });
+    }).then(()=>{ console.log('load complete')});
   }, [dispatch]);
 
   if(isLoaded){

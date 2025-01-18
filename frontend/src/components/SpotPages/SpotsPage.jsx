@@ -7,8 +7,20 @@ import './SpotsPage.css'
 function SpotsPage(){
     const dispatch = useDispatch()
 
+    useEffect(()=>{
+        dispatch(spotActions.loadSpots())
+        console.log('dispatch ran')
+        // console.log('SPOTDATA', spotData)
+    }, [dispatch])
+
     const spotData = useSelector(state => state.spot.spots.Spots)
     // console.log('SPOTDATA', spotData)
+
+    if(!spotData){
+        return (
+            <h1>Page Loading...</h1>
+        )
+    }
 
     spotData.forEach(spot=>{
         const string = `${spot.avgRating}`
@@ -40,16 +52,13 @@ function SpotsPage(){
 
 
 
-    useEffect(()=>{
-        // console.log('dispatch ran')
-        // console.log('SPOTDATA', spotData)
-    }, [dispatch])
+    
 
     return(
         <div id="holder">
            {spotData.map((spot)=> (
-                <NavLink to={`spots/${spot.id}`}>
-                    <button className="container" key={spot.id}>
+                <NavLink to={`spots/${spot.id}`} key={spot.id}>
+                    <button className="container">
                             <div className="imageHolder">
                                 <img className="img" src={spot.previewImage.url} alt="No Image Shown" />
                             </div>
