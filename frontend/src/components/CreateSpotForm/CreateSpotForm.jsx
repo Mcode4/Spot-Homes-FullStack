@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import * as spotActions from '../../store/spot'
+import './CreateSpotForm.css'
 
 function CreateSpot(){
     const [country, setCountry] = useState('') 
@@ -53,62 +54,59 @@ function CreateSpot(){
                     <div>Guest wil only get your exact address once they've booked a reservation.</div>
                 </div>
 
-                <div id="setDetails">
+                <div id="setDetails" className="formOption">
                     <label htmlFor="">
                         Country
-                        <input type="text" placeholder="Country" onChange={(e)=>setCountry(e.target.value)} value={country} />
+                        <input type="text" className="input" placeholder="Country" onChange={(e)=>setCountry(e.target.value)} value={country} />
                     </label>
                     <label htmlFor="">
                         Street Address
-                        <input type="text" placeholder="Street Address" onChange={(e)=>setAddress(e.target.value)} value={address} />
+                        <input type="text" className="input" placeholder="Street Address" onChange={(e)=>setAddress(e.target.value)} value={address} />
                     </label>
                     <label htmlFor="">
                         City
-                        <input type="text" placeholder="City" onChange={(e)=>setCity(e.target.value)} value={city} />
+                        <input type="text" className="input" placeholder="City" onChange={(e)=>setCity(e.target.value)} value={city} />
                     </label>
                     <label htmlFor="">
                         State
-                        <input type="text" placeholder="State" onChange={(e)=>setState(e.target.value)} value={state} />
+                        <input type="text" className="input" placeholder="State" onChange={(e)=>setState(e.target.value)} value={state} />
                     </label>
                     <label htmlFor="">
                         Lattitude
-                        <input type="text" placeholder="Lattitude" onChange={(e)=>setLat(e.target.value)} value={lat} />
+                        <input type="text" className="input" placeholder="Lattitude" onChange={(e)=>setLat(e.target.value)} value={lat} />
                     </label>
                     <label htmlFor="">
                         Langitude
-                        <input type="text" placeholder="Langitude" onChange={(e)=>setLng(e.target.value)} value={lng} />
+                        <input type="text" className="input" placeholder="Langitude" onChange={(e)=>setLng(e.target.value)} value={lng} />
                     </label>
                 </div>
 
-                <div id="setDescription">
+                <div id="setDescription" className="formOption">
                     <div>Describe your place to guests</div>
                     <div>Mention the best feature of your space, any special amenities like fast wifi or parking, and what you love about the neighborbood.</div>
-                    <input type="text" placeholder="Please write at least 30 characters" onChange={(e)=>setDescription(e.target.value)} value={description} />
+                    <textarea name="input" className="input" id="descriptionInput" placeholder="Please write at least 30 characters" onChange={(e)=>setDescription(e.target.value)} value={description}></textarea>
                 </div>
 
-                <div id="setTitle">
+                <div id="setTitle" className="formOption">
                     <div>Create a title of your spot</div>
                     <div>Catch guests' attention with a spot title that highlights what makes your place special.</div>
-                    <input type="text" placeholder="Name of your spot" onChange={(e)=>setName(e.target.value)} value={name} />
+                    <input className="input" type="text" placeholder="Name of your spot" onChange={(e)=>setName(e.target.value)} value={name} />
                 </div>
 
-                <div id="setPrice">
+                <div id="setPrice" className="formOption">
                     <div>Set a base price for your spot</div>
                     <div>Competitive pricing can help your listing stand out and rank higher in search results.</div>
-                    <label htmlFor="">
-                        $
-                        <input type="text" placeholder="Price per night" onChange={(e)=>setPrice(e.target.value)} value={price} />
-                    </label>
+                    <div className="priceInputDiv">$ <input className="input" type="text"  placeholder="Price per night" onChange={(e)=>setPrice(e.target.value)} value={price} /></div>
                 </div>
 
-                <div id="setPhotos">
+                <div id="setPhotos" className="formOption">
                     <div>Liven up your spot with photos</div>
                     <div>Submit a link to at least one photo to publish your spot.</div>
-                    <input type="text" placeholder="Preview Image Url" onChange={(e)=>setPreviewImage(e.target.value)} value={previewImage} />
-                    <input type="text" placeholder="Image Url" onChange={(e)=>setImage1(e.target.value)} value={image1} />
-                    <input type="text" placeholder="Image Url" onChange={(e)=>setImage2(e.target.value)} value={image2} />
-                    <input type="text" placeholder="Image Url" onChange={(e)=>setImage3(e.target.value)} value={image3} />
-                    <input type="text" placeholder="Image Url" onChange={(e)=>setImage4(e.target.value)} value={image4} />
+                    <input className="input" type="text" placeholder="Preview Image Url" onChange={(e)=>setPreviewImage(e.target.value)} value={previewImage} />
+                    <input className="input" type="text" placeholder="Image Url" onChange={(e)=>setImage1(e.target.value)} value={image1} />
+                    <input className="input" type="text" placeholder="Image Url" onChange={(e)=>setImage2(e.target.value)} value={image2} />
+                    <input className="input" type="text" placeholder="Image Url" onChange={(e)=>setImage3(e.target.value)} value={image3} />
+                    <input className="input" type="text" placeholder="Image Url" onChange={(e)=>setImage4(e.target.value)} value={image4} />
                 </div>
                 <button type="submit">Create Spot</button>
             </form>

@@ -79,7 +79,30 @@ export const loadCurrentSpots = () => async(dispatch)=>{
     const data = await res.json()
     dispatch(loadCurrDataAction(data))
     return res
-  }
+}
+
+export const createSpot = (data) => async(dispatch)=>{
+    // const {address, city, state, country, lat, lng, name, description, price, previewImage,
+    //     images} = data
+    // const body = {address, city, state, country, lat, lng, name, description, price}
+
+    // const res = await csrfFetch('/api/spots', {
+    //     method: "POST",
+    //     body: JSON.stringify(body)
+    // })
+    // const confirm = await res.json()
+
+    // const res2 = await csrfFetch(`/api/spots/${id}/images`, {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //         preview: previewImage,
+    //         url: images
+    //     })
+    // })
+    // const confirm2 = await res2.json()
+    // console.log('RES', confirm)
+    // console.log('RES2', confirm2)
+}
 
 //Reducer
 const initialState = {spots: [], spotData: [], currData: [] }

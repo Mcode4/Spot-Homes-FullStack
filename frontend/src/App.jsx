@@ -7,7 +7,7 @@ import Navigation from './components/Navigation';
 import SpotsPage from './components/SpotPages';
 import SpotPage from './components/SpotPages/SpotPage';
 import ManageSpots from './components/ManageSpots';
-import CreateSpot from './components/CreateSpot';
+import CreateSpot from './components/CreateSpotForm';
 
 function Layout() {
   const dispatch = useDispatch();

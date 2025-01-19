@@ -1,0 +1,40 @@
+#createPage{
+    height: 100%;
+    width: 400px;
+    justify-self: center;
+    display: grid;
+    grid-template-rows: 150px 200px 150px 100px 50px 200px 50px;
+    gap: 10px;
+}
+.input{
+    width: 99%;
+    border-radius: 0%;
+}
+label{
+    width: 90%;
+    padding-right: 10px;
+    align-items: center;
+}
+.formOption{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid black;
+}
+#priceInput{
+    width: fit-content;
+    border-radius: 0%;
+    border-right: 10px;
+}
+.priceInputDiv{
+    width: 100%;
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+}
+#descriptionInput{
+    height: 100px;
+    text-align: left;
+}
+#descriptionInput::placeholder{
+    text-align: left;
+}
