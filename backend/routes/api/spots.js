@@ -400,7 +400,7 @@ router.post('/:spotId/images',async (req,res)=>{
     }
    
    try{
-    const newSpotImg = await SpotImage.create({"spotId":Number(spotid),url,preview});
+    const newSpotImg = await SpotImage.create({"spotId":Number(spotid),url,preview: preview});
     res.setHeader("Content-Type","application/json");
     res.status(201);
    return  res.json(newSpotImg)

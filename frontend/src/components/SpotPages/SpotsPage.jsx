@@ -13,7 +13,7 @@ function SpotsPage(){
         // console.log('SPOTDATA', spotData)
     }, [dispatch])
 
-    const spotData = useSelector(state => state.spot.spots.Spots)
+    const spotData = useSelector(state => state.spot.spots)
     // console.log('SPOTDATA', spotData)
 
     if(!spotData){
@@ -23,14 +23,16 @@ function SpotsPage(){
     }
 
     spotData.forEach(spot=>{
-        if(spot.avgRating === undefined){
+        if(spot.avgRating === undefined || spot.avgRating === null){
             spot.avgRating = 0
+            spot.displayRating = 'new'
+        } else if(spot.avgRating === 0 || spot.avgRating === '0'){
             spot.displayRating = 'new'
         } else {
             const string = `${spot.avgRating}`
             let newValue
 
-            if(string.length > 3){
+            if(string.length > 3 && string.includes('.')){
                 const split = string.split('.')
                 let newString = split[1]
                 let num1 = Number(newString[0])
@@ -44,9 +46,9 @@ function SpotsPage(){
                 spot.displayRating = newValue
             } 
             else if(!string.includes('.')){
-                console.log('FLAG', string)
+                // console.log('FLAG', string)
                 newValue = `${string}.0`
-                console.log(newValue)
+                // console.log(newValue)
                 spot.displayRating = newValue
             }
             else spot.displayRating = Number(string)

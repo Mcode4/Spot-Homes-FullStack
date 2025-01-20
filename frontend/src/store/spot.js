@@ -5,6 +5,7 @@ const LOAD_SPOTDATA = 'spot/loadSpotData'
 const LOAD_CURRDATA = 'spot/loadCurrData'
 const EDIT_SPOT = 'spot/editSpot'
 const CREATE_SPOT = 'spot/newSpot'
+const CREATE_REVIEW = 'spot/newReview'
 const REMOVE_SPOT = 'spot/removeSpot'
 
 //Action Creators
@@ -50,16 +51,14 @@ const removeSpotAction = (action)=>{
 export const loadSpots = () => async (dispatch)=>{
     const res = await fetch(`/api/spots`)
     const data = await res.json()
-    dispatch(loadSpotsAction(data))
+    // console.log('DATA', data)
+    dispatch(loadSpotsAction(data.Spots))
     return res
 }
 
 export const loadSpotData = (spotId) => async (dispatch) =>{
     const res = await fetch(`/api/spots/${spotId}`)
     const spotData = await res.json()
-    // spot.owner = spotData.Owner
-    // spot.spotImages = spotData.SpotImages
-
 
     const res2 = await fetch(`/api/spots/${spotId}/reviews`)
     const reviewData = await res2.json()
@@ -77,32 +76,74 @@ export const loadSpotData = (spotId) => async (dispatch) =>{
 export const loadCurrentSpots = () => async(dispatch)=>{
     const res = await fetch('/api/spots/current')
     const data = await res.json()
-    dispatch(loadCurrDataAction(data))
+    // console.log('DATA', data)
+    dispatch(loadCurrDataAction(data.Spots))
     return res
 }
 
 export const createSpot = (data) => async(dispatch)=>{
-    // const {address, city, state, country, lat, lng, name, description, price, previewImage,
-    //     images} = data
-    // const body = {address, city, state, country, lat, lng, name, description, price}
+    const {address, city, state, country, lat, lng, name, description, price, previewImage,
+        images} = data
+    const body = {address, city, state, country, lat, lng, name, description, price}
+    console.log('BODY', body)
 
-    // const res = await csrfFetch('/api/spots', {
-    //     method: "POST",
-    //     body: JSON.stringify(body)
-    // })
-    // const confirm = await res.json()
+    const res = await csrfFetch('/api/spots', {
+        method: "POST",
+        body: JSON.stringify(body)
+    })
+    const confirm = await res.json()
+    const {id} = confirm
 
-    // const res2 = await csrfFetch(`/api/spots/${id}/images`, {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //         preview: previewImage,
-    //         url: images
-    //     })
-    // })
-    // const confirm2 = await res2.json()
+    const res2 = await csrfFetch(`/api/spots/${id}/images`, {
+        method: 'POST',
+        body: JSON.stringify({
+            preview: true,
+            url: previewImage
+        })
+    })
+    const confirm2 = await res2.json()
+
+    images.forEach(async(image) => {
+        const res3 = await csrfFetch(`/api/spots/${id}/images`, {
+            method: 'POST',
+            body: JSON.stringify({
+                preview: false,
+                url: image
+            })
+        })
+        const confirm3 = await res3.json()
+        // console.log('RES3', confirm3)
+    });
+
+    dispatch(createSpotAction(confirm))
+    
     // console.log('RES', confirm)
+    // console.log('ID', id)
     // console.log('RES2', confirm2)
+    return res
 }
+export const editSpot = (data)=> async (dispatch)=>{
+    const {address, city, state, country,lat,lng,name,description,price, id}= data
+    const body = {address, city, state, country,lat,lng,name,description,price}
+    const res = csrfFetch(`/api/spots/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(body)
+    })
+    const data = res.json()
+
+    dispatch(editSpotAction(data))
+    return res
+}
+export const deleteSpot = (id)=> async(dispatch)=>{
+    const res = await csrfFetch(`/api/spots/${id}`, {
+        method: 'DELETE'
+    })
+    const data = res.json()
+
+    dispatch(removeSpotAction(data))
+    return res
+}
+
 
 //Reducer
 const initialState = {spots: [], spotData: [], currData: [] }

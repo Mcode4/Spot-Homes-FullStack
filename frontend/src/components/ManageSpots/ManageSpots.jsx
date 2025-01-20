@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
+import OpenModalButton from '../OpenModalButton'
+import DeleteFormModal from "../DeleteFormModals"
 import * as spotActions from '../../store/spot'
 
 function ManageSpots(){
@@ -10,7 +12,7 @@ function ManageSpots(){
         dispatch(spotActions.loadCurrentSpots())
     }, [dispatch])
 
-    const userSpots = useSelector(state => state.spot.currData.Spots)
+    const userSpots = useSelector(state => state.spot.currData)
 
     if(!userSpots){
         return (
@@ -19,14 +21,17 @@ function ManageSpots(){
     }
 
     userSpots.forEach(spot=>{
-        if(spot.avgRating === undefined){
+        if(spot.avgRating === undefined || spot.avgRating === null){
+            spot.avgRating = 0
+            spot.displayRating = 'new'
+        } else if(spot.avgRating === 0 || spot.avgRating === '0'){
             spot.avgRating = 0
             spot.displayRating = 'new'
         } else {
             const string = `${spot.avgRating}`
             let newValue
 
-            if(string.length > 3){
+            if(string.length > 3 && string.includes('.')){
                 const split = string.split('.')
                 let newString = split[1]
                 let num1 = Number(newString[0])
@@ -40,14 +45,13 @@ function ManageSpots(){
                 spot.displayRating = newValue
             } 
             else if(!string.includes('.')){
-                console.log('FLAG', string)
+                // console.log('FLAG', string)
                 newValue = `${string}.0`
-                console.log(newValue)
+                // console.log(newValue)
                 spot.displayRating = newValue
             }
             else spot.displayRating = Number(string)
         }
-        
     })
 
     return (
@@ -60,26 +64,30 @@ function ManageSpots(){
             </div>
             <div id="manageContainer">
                 {userSpots.map((spot)=> (
-                    <NavLink to={`/spots/${spot.id}`} key={spot.id} className='spotHolder'>
-                        <div className="spots">
+                    <div className="spots">
+                        <NavLink to={`/spots/${spot.id}`} key={spot.id} className='spotHolder'>
                             <div className="imgContainer">
                                 <img src={spot.previewImage} alt="No Image" className="img" />
                             </div>
                             <div className="spotInfo">
                                 <div className="info1">
                                     <div className="location">{spot.city}, {spot.state}</div>
-                                    <div className="rating">{spot.avgRating}</div>
+                                    <div className="rating">{spot.displayRating}</div>
                                 </div>
                                 <div className="info2">
                                     <div>${spot.price} a night</div>
                                 </div>
                             </div>
-                            <div className="spotActions">
-                                <button>Update</button>
-                                <button>Delete</button>
-                            </div>
+                        </NavLink>
+                        <div className="spotActions">
+                            <button><NavLink to={`/spots/${spot.id}/edit`}>Update</NavLink></button>
+                            <OpenModalButton
+                                buttonText="Delete"
+                                modalComponent={<DeleteFormModal id={spot.id} type={'Spot'} />}
+                            />
                         </div>
-                    </NavLink>
+                    </div>
+                
                 ))}
             </div>
         </div>
