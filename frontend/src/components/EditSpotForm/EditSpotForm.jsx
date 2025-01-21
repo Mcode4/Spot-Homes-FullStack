@@ -5,10 +5,25 @@ import * as spotActions from '../../store/spot'
 import './EditSpotForm.css'
 
 function EditSpot(){
+    const [country, setCountry] = useState('') 
+    const [address, setAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [lat, setLat] = useState('')
+    const [lng, setLng] = useState('')
+    const [description, setDescription] = useState('')
+    const [name, setName] = useState('')
+    const [price, setPrice] = useState('')
+    const [previewImage, setPreviewImage] = useState('')
+    const [image1, setImage1] = useState('')
+    const [image2, setImage2] = useState('')
+    const [image3, setImage3] = useState('')
+    const [image4, setImage4] = useState('')
+
     const dispatch = useDispatch()
     const { id } = useParams()
     const spotData = useSelector(state => state.spot.spotData.spotData)
-    let previewImg = ''
+    let previewImg = spotData.SpotImages[0].url
     const images = ['', '', '', '']
     let index = 0
 
@@ -23,31 +38,29 @@ function EditSpot(){
         )
     }
 
-    spotData.SpotImages.forEach(image=>{
-        if(image.preview){
-            previewImg = `${image.url}`
-        } else {
+    spotData.SpotImages.forEach((image, i)=>{
+        if(i !== 0){
             images.splice(index, 1, `${image.url}`)
             index++
         }
     })
     index = 0
 
-    const [country, setCountry] = useState(`${spotData.country}`) 
-    const [address, setAddress] = useState(`${spotData.address}`)
-    const [city, setCity] = useState(`${spotData.city}`)
-    const [state, setState] = useState(`${spotData.state}`)
-    const [lat, setLat] = useState(`${spotData.lat}`)
-    const [lng, setLng] = useState(`${spotData.lng}`)
-    const [description, setDescription] = useState(`${spotData.description}`)
-    const [name, setName] = useState(`${spotData.name}`)
-    const [price, setPrice] = useState(`${spotData.price}`)
-    const [previewImage, setPreviewImage] = useState(`${previewImg}`)
-    const [image1, setImage1] = useState(`${images[0]}`)
-    const [image2, setImage2] = useState(`${images[1]}`)
-    const [image3, setImage3] = useState(`${images[2]}`)
-    const [image4, setImage4] = useState(`${images[3]}`)
-    const errors = {}
+    setCountry(`${spotData.country}`) 
+    setAddress(`${spotData.address}`)
+    setCity(`${spotData.city}`)
+    setState(`${spotData.state}`)
+    setLat(`${spotData.lat}`)
+    setLng(`${spotData.lng}`)
+    setDescription(`${spotData.description}`)
+    setName(`${spotData.name}`)
+    setPrice(`${spotData.price}`)
+    setPreviewImage(`${previewImg}`)
+    setImage1(`${images[0]}`)
+    setImage2(`${images[1]}`)
+    setImage3(`${images[2]}`)
+    setImage4(`${images[3]}`)
+    // const errors = {}
 
 
     const onSumbit = (e)=>{
@@ -77,8 +90,8 @@ function EditSpot(){
             <form onSubmit={onSumbit}>
                 <div id="head">
                     <div>Update your Spot</div>
-                    <div>Where's your place located</div>
-                    <div>Guest wil only get your exact address once they've booked a reservation.</div>
+                    <div>{`Where's your place located`}</div>
+                    <div>{`Guest wil only get your exact address once they've booked a reservation.`}</div>
                 </div>
 
                 <div id="setDetails" className="formOption">
@@ -116,7 +129,7 @@ function EditSpot(){
 
                 <div id="setTitle" className="formOption">
                     <div>Create a title of your spot</div>
-                    <div>Catch guests' attention with a spot title that highlights what makes your place special.</div>
+                    <div>{`Catch guests' attention with a spot title that highlights what makes your place special.`}</div>
                     <input className="input" type="text" placeholder="Name of your spot" onChange={(e)=>setName(e.target.value)} value={name} />
                 </div>
 

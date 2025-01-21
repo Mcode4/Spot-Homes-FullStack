@@ -73,25 +73,13 @@ function SpotPage(){
         reviewStatement = ''
     } 
 
-    let previewImage
-    let spotImages = []
-    spotData.SpotImages.forEach((image)=>{
-        if(image.preview = true){
-            // console.log('IMAGE', image)
-            previewImage = image
-        } else {
-            spotImages.push(image)
-        }
-    })
-
     // console.log(`PrevImage: ${previewImage}`)
-    // console.log(`Images: ${spotImages}`)
 
 
     const modalClassName = (showMenu ? 'visible' : 'hiddeny')
     // console.log('MODALCLASS', modalClassName)
 
-    const closeMenu = (e)=>{
+    const closeMenu = ()=>{
         setShowMenu(false)
     }
 
@@ -103,12 +91,15 @@ function SpotPage(){
             </header>
             <section id="s1">
                 <div id="mPic">
-                    <img src={previewImage.url} alt="bigImg" className="bigImg" />
+                    <img src={spotData.SpotImages[0].url} alt="bigImg" className="bigImg" />
                 </div>
                 <div id="oPic">
-                    {spotImages.map((image)=> (
-                        <img src={image.url} alt="smallImg" className="smallImg" />
-                    ))}
+                {spotData.SpotImages.map((image, i) => {
+                    if (i !== 0) {
+                    return <img src={image.url} alt="smallImg" className="smallImg" key={image.id} />;
+                    }
+                    return null; // This ensures the first image is not rendered
+                })}
                 </div>
             </section>
 
