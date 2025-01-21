@@ -1,6 +1,5 @@
 import { useModal } from "../../context/Modal"
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch} from "react-redux"
 import * as spotActions from '../../store/spot'
 import * as reviewActions from '../../store/review'
 

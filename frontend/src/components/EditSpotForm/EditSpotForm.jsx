@@ -14,7 +14,7 @@ function EditSpot(){
 
     useEffect(()=>{
         dispatch(spotActions.loadSpotData(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
 
     if(!spotData){
@@ -64,7 +64,8 @@ function EditSpot(){
             name,
             price,
             previewImage,
-            images: [image1, image2, image3, image4]
+            images: [image1, image2, image3, image4],
+            id
         }
         // address, city, state, country, lat, lng, name,description, price
         console.log('FORM', form)

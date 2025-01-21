@@ -5,7 +5,6 @@ const LOAD_SPOTDATA = 'spot/loadSpotData'
 const LOAD_CURRDATA = 'spot/loadCurrData'
 const EDIT_SPOT = 'spot/editSpot'
 const CREATE_SPOT = 'spot/newSpot'
-const CREATE_REVIEW = 'spot/newReview'
 const REMOVE_SPOT = 'spot/removeSpot'
 
 //Action Creators
@@ -101,17 +100,17 @@ export const createSpot = (data) => async(dispatch)=>{
             url: previewImage
         })
     })
-    const confirm2 = await res2.json()
+    // const confirm2 = await res2.json()
 
     images.forEach(async(image) => {
-        const res3 = await csrfFetch(`/api/spots/${id}/images`, {
+        await csrfFetch(`/api/spots/${id}/images`, {
             method: 'POST',
             body: JSON.stringify({
                 preview: false,
                 url: image
             })
         })
-        const confirm3 = await res3.json()
+        // const confirm3 = await res3.json()
         // console.log('RES3', confirm3)
     });
 
@@ -120,16 +119,16 @@ export const createSpot = (data) => async(dispatch)=>{
     // console.log('RES', confirm)
     // console.log('ID', id)
     // console.log('RES2', confirm2)
-    return res
+    return res && res2
 }
 export const editSpot = (data)=> async (dispatch)=>{
-    const {address, city, state, country,lat,lng,name,description,price, id}= data
-    const body = {address, city, state, country,lat,lng,name,description,price}
-    const res = csrfFetch(`/api/spots/${id}`, {
+    const {id}= data
+    const res = await csrfFetch(`/api/spots/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(body)
+        body: JSON.stringify(data)
     })
-    const data = res.json()
+    const resData = await res.json()
+    console.log('DATTAA', resData)
 
     dispatch(editSpotAction(data))
     return res

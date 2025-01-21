@@ -62,7 +62,7 @@ export const editReview = (data) => async (dispatch)=>{
     })
     const reviewData = await res.json()
 
-    dispatch(createReviewAction(reviewData))
+    dispatch(editReviewAction(reviewData))
     return res
 }
 
@@ -84,7 +84,7 @@ const reviewReducer = (state= initialState, action) =>{
         case LOAD_REVIEWS:
             return {...state, reviews: action.payload}
         case EDIT_REVIEW:
-            return {...state, reviews: reviews.map(review=>
+            return {...state, reviews: state.reviews.map(review=>
                 review.id === action.payload.id ? {...review, ...action.payload} : review
             )}
         case CREATE_REVIEW:

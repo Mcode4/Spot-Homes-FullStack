@@ -18,7 +18,7 @@ function CreateSpot(){
     const [image2, setImage2] = useState('')
     const [image3, setImage3] = useState('')
     const [image4, setImage4] = useState('')
-    const errors = {}
+    // const errors = {}
     const dispatch = useDispatch()
 
 
@@ -50,8 +50,8 @@ function CreateSpot(){
             <form onSubmit={onSumbit}>
                 <div id="head">
                     <div>Create a new Spot</div>
-                    <div>Where's your place located</div>
-                    <div>Guest wil only get your exact address once they've booked a reservation.</div>
+                    <div>{`Where's your place located`}</div>
+                    <div>{`Guest wil only get your exact address once they've booked a reservation.`}</div>
                 </div>
 
                 <div id="setDetails" className="formOption">
@@ -89,7 +89,7 @@ function CreateSpot(){
 
                 <div id="setTitle" className="formOption">
                     <div>Create a title of your spot</div>
-                    <div>Catch guests' attention with a spot title that highlights what makes your place special.</div>
+                    <div>{`Catch guests' attention with a spot title that highlights what makes your place special.`}</div>
                     <input className="input" type="text" placeholder="Name of your spot" onChange={(e)=>setName(e.target.value)} value={name} />
                 </div>
 

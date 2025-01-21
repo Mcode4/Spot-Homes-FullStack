@@ -64,8 +64,8 @@ function ManageSpots(){
             </div>
             <div id="manageContainer">
                 {userSpots.map((spot)=> (
-                    <div className="spots">
-                        <NavLink to={`/spots/${spot.id}`} key={spot.id} className='spotHolder'>
+                    <div className="spots" key={spot.id}>
+                        <NavLink to={`/spots/${spot.id}`} className='spotHolder'>
                             <div className="imgContainer">
                                 <img src={spot.previewImage} alt="No Image" className="img" />
                             </div>
