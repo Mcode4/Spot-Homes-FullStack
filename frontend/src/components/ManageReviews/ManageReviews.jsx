@@ -4,6 +4,7 @@ import OpenModalButton from "../OpenModalButton"
 import ReviewFormModal from "../ReviewFormModal"
 import DeleteFormModal from "../DeleteFormModals"
 import * as reviewActions from '../../store/review'
+import './ManageReviews.css'
 
 function ManageReviews(){
     const dispatch = useDispatch()
@@ -31,7 +32,6 @@ function ManageReviews(){
                         <div>{review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
                         <div>{review.review}</div>
                         <div className="reviewActions">
-                            <button className="updateButton">Update</button>
                             <OpenModalButton
                                 buttonText="Update"
                                 modalComponent={<ReviewFormModal id={review.id} spot={review.Spot.name} />}

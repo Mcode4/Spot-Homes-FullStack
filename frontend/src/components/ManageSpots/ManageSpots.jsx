@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import OpenModalButton from '../OpenModalButton'
 import DeleteFormModal from "../DeleteFormModals"
 import * as spotActions from '../../store/spot'
+import './ManageSpots.css'
 
 function ManageSpots(){
     const dispatch = useDispatch()

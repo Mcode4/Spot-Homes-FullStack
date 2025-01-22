@@ -12,29 +12,29 @@ function ReviewFormModal({ id, spot }){
     const spotInfo = useSelector(state=> state.review.reviews.Reviews[id-1])
 
     useEffect(()=>{
-        dispatch(reviewActions.loadReviews())
-    }, [dispatch])
+        if(spot){
+            setReview(`${spotInfo.review}`)
+            setStars(spotInfo.stars)
+        }
+    }, [spot, spotInfo])
 
-    if(!spotInfo){
+    if(!spotInfo && spot){
         return (
             <h1>Review Loading...</h1>
         )
     }
-    if(spot){
-        console.log('SPOTINFO', spotInfo)
-        // const [review, setReview] = useState(`${spotInfo.review}`)
-        // const [stars, setStars] = useState(spotInfo.stars)
-        setReview(`${spotInfo.review}`)
-        setStars(spotInfo.stars)
-    }
+    
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-        return dispatch(reviewActions.postReview({
-            id,
-            review,
-            stars
-        })).then(closeModal)
+        if(!spot){
+            return dispatch(reviewActions.postReview({
+                id,
+                review,
+                stars
+            })).then(closeModal)
+        }
+        
             // .catch(async (res)=>{
             //     const data = await res.json()
             //     if(data && data.errors){
@@ -46,7 +46,7 @@ function ReviewFormModal({ id, spot }){
         <div className="modal">
             <h1>How was your stay?</h1>
             <form id="reviewForm" onSubmit={handleSubmit}>
-                {!spot && (<textarea id="review" onChange={(e)=> setReview(e.target.value)} value={review}></textarea>)}
+            <textarea id="review" onChange={(e)=> setReview(e.target.value)} value={review}></textarea>
                 <div id="stars">
                     <div className="starButton1" onClick={()=>setStars(1)}>★</div>
                     <div className="starButton2" onClick={()=>setStars(2)}>★</div>

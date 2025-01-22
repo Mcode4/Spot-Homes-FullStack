@@ -68,9 +68,9 @@ function SpotPage(){
 
     let reviewStatement = '1 Review'
     if(!reviewData.Reviews){
-        reviewStatement = '0 Reviews'
-    }else if(reviewData.Reviews.length > 1){
         reviewStatement = ''
+    }else if(reviewData.Reviews.length > 1){
+    reviewStatement =   `${reviewData.Reviews.length} Reviews`
     } 
 
     // console.log(`PrevImage: ${previewImage}`)
@@ -120,8 +120,7 @@ function SpotPage(){
         
             <section id="s3">
                 <div>
-                    <div className="hText">★{spotData.displayRating}</div>
-                    <div className="hText">{reviewStatement}</div>
+                    <div className="hText" id="rating2">★{spotData.displayRating} {reviewStatement}</div>
                 </div>
                 <div>
                     {user && <div className={modalClassName}>
@@ -136,7 +135,8 @@ function SpotPage(){
                             <div id="rName" className="shText">rName- {review.User.firstName}</div>
                             <div id="rDate" className="nText">rData- {review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
                             <div id="rComment" className="nText">rComment- {review.review}</div>
-                            {review.User.username === user.username && (
+                            {console.log('ReviewW', review)}
+                            {review.User.id === user.id && (
                                 <div className="reviewActions">
                                     <OpenModalButton
                                         buttonText="Update"
@@ -153,7 +153,7 @@ function SpotPage(){
                         </div>
                     ))}
                     {!reviewData.Reviews && (
-                        <div>Be the first tp post a review!</div>
+                        <div>Be the first to post a review!</div>
                     )}
                 </div>
             </section>
