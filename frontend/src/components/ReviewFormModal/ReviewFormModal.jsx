@@ -9,16 +9,19 @@ function ReviewFormModal({ id, spot }){
     // const [errors, setErrors] = useState({})
     const {closeModal} = useModal()
     const dispatch = useDispatch()
-    const spotInfo = useSelector(state=> state.review.reviews.Reviews[id-1])
+    useEffect(()=>{
+        dispatch(reviewActions.loadReviews())
+    }, [dispatch])
+    const reviewData = useSelector(state=> state.review.reviews.Reviews[id-1])
 
     useEffect(()=>{
-        if(spot){
-            setReview(`${spotInfo.review}`)
-            setStars(spotInfo.stars)
+        if(reviewData){
+            setReview(`${reviewData.review}`)
+            setStars(reviewData.stars)
         }
-    }, [spot, spotInfo])
+    }, [spot, reviewData])
 
-    if(!spotInfo && spot){
+    if(spot && !reviewData){
         return (
             <h1>Review Loading...</h1>
         )

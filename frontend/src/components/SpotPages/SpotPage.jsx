@@ -61,6 +61,16 @@ function SpotPage(){
         else spotData.displayRating = Number(string)
     }
 
+    let verify = (reviewUser)=>{
+        return null
+    }
+    if(user){
+        verify = (reviewUser)=>{
+            console.log('VERIFY', reviewUser.id, user.id)
+            return reviewUser.id === user.id
+        }
+    }
+
     
 
     console.log('SPOTDATA', spotData)
@@ -135,8 +145,8 @@ function SpotPage(){
                             <div id="rName" className="shText">rName- {review.User.firstName}</div>
                             <div id="rDate" className="nText">rData- {review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
                             <div id="rComment" className="nText">rComment- {review.review}</div>
-                            {console.log('ReviewW', review)}
-                            {review.User.id === user.id && (
+                            {console.log('ReviewWUSER', review.User.id === user.id)}
+                            {verify(review.User) && (
                                 <div className="reviewActions">
                                     <OpenModalButton
                                         buttonText="Update"
