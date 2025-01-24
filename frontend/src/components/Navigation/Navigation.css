@@ -31,7 +31,6 @@
 
 /* Profile Button */
 #profileDiv{
-    height: 50px;
     width: 140px;
     justify-items: center;
     border-radius: 10px;
@@ -41,16 +40,14 @@ li{
     list-style-type: none;
 }
 
-.visible{
-    display: flex;
+.profile-dropdownvisible{
+    position: relative;
+    display: grid;
     visibility: visible;
+    z-index: 2;
+    background-color: gray;
 }
 .hidden{
     display: flex;
     visibility: hidden;
-}
-.profile-dropdown{
-    background-color: gray;
-    width: 150px;
-    height: 60px;
 }

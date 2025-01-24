@@ -18,6 +18,7 @@
     gap: 10px;
     justify-items: center;
     justify-self: center;
+    z-index: 1;
 }
 
 /* Top Page Header */

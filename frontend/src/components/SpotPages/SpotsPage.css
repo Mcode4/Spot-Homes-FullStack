@@ -5,6 +5,7 @@
     row-gap: 10px; */
     gap: 20px;
     justify-content: center;
+    z-index: 1;
 }
 .container{
     height: 250px;

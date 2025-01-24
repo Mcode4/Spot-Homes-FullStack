@@ -42,7 +42,6 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "visible" : " hidden");
 
-
   return (
     <div id='profileDiv'>
       <button onClick={toggleMenu}>
@@ -52,6 +51,7 @@ function ProfileButton({ user }) {
         {user ? (
           <div className='profileInfo'>
             {/* <li>Hello {user.username}</li> */}
+            
             <li>Hello, {user.firstName}</li> {/*{user.lastName}*/}
             <li>{user.email}</li>
             <button>
