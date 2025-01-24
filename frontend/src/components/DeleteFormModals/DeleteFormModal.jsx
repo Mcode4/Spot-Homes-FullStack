@@ -12,13 +12,13 @@ function DeleteFormModal({type, id}){
     
     if(type === 'Spot'){
         deleteFunc = async ()=>{
-            dispatch(spotActions.deleteSpot(id))
+            dispatch(spotActions.deleteSpot(id)).then(closeModal)
         }
         deleteMessage = 'Are you sure you want to remove this spot from the listings'
         deleteButtonText= ['Yes (Delete Spot)', 'No (Keep Spot)']
     } else if(type === 'Review'){
         deleteFunc = async ()=>{
-            dispatch(reviewActions.deleteReview(id))
+            dispatch(reviewActions.deleteReview(id)).then(closeModal)
         }
         deleteMessage = 'Are you sure you want to remove this review for spot'
         deleteButtonText= ['Yes (Delete Review)', 'No (Keep Review)']

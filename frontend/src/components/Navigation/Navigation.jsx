@@ -12,10 +12,10 @@ function Navigation({ isLoaded }) {
         <NavLink to="/">Home</NavLink>
       </li>
       {isLoaded && (
-        <div id='left-justified'>
-          <li>
+        <div id='right-justified'>
+          {sessionUser && (<li>
             <NavLink to={'/spots/new'}>Create a New Spot</NavLink>
-          </li>
+          </li>)}
           <li id='profile'>
             <ProfileButton user={sessionUser} />
           </li>

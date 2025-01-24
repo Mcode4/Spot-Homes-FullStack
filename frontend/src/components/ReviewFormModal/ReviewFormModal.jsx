@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector} from "react-redux"
 import { useModal } from "../../context/Modal"
 import * as reviewActions from '../../store/review';
+import './ReviewFormModal.css'
 
 function ReviewFormModal({ id, spot }){
     const [review, setReview] = useState('')
@@ -12,14 +13,33 @@ function ReviewFormModal({ id, spot }){
     useEffect(()=>{
         dispatch(reviewActions.loadReviews())
     }, [dispatch])
-    const reviewData = useSelector(state=> state.review.reviews.Reviews[id-1])
+    const reviewData = useSelector(state=> state.review.reviews[id-1])
+    console.log('reviewData', reviewData)
 
     useEffect(()=>{
-        if(reviewData){
+        if(reviewData && spot){
             setReview(`${reviewData.review}`)
             setStars(reviewData.stars)
         }
     }, [spot, reviewData])
+
+    useEffect(()=>{
+        let displayStars = stars
+        if(stars !== 0){
+            console.log('STARS', stars)
+            console.log('DISPLAYSTARS', displayStars)
+            for(let i=1; i<=displayStars; i++){
+                const element = document.getElementById(`starButton${i}`)
+                element.style.color = 'yellow'
+            }
+            if(stars !== 5){
+                for(let i=displayStars+1; i<=5; i++){
+                    const element = document.getElementById(`starButton${i}`)
+                    element.style.color = 'black'
+                }
+            }
+        }
+    },[stars])
 
     if(spot && !reviewData){
         return (
@@ -36,6 +56,12 @@ function ReviewFormModal({ id, spot }){
                 review,
                 stars
             })).then(closeModal)
+        } else{
+            return dispatch(reviewActions.editReview({
+                id,
+                review,
+                stars
+            })).then(closeModal)
         }
         
             // .catch(async (res)=>{
@@ -47,15 +73,16 @@ function ReviewFormModal({ id, spot }){
     }
     return (
         <div className="modal">
-            <h1>How was your stay?</h1>
+            {!spot && <h1>How was your stay?</h1>}
+            {spot && <h1>How was your stay at {spot}?</h1>}
             <form id="reviewForm" onSubmit={handleSubmit}>
-            <textarea id="review" onChange={(e)=> setReview(e.target.value)} value={review}></textarea>
+                <textarea id="review" onChange={(e)=> setReview(e.target.value)} value={review}></textarea>
                 <div id="stars">
-                    <div className="starButton1" onClick={()=>setStars(1)}>★</div>
-                    <div className="starButton2" onClick={()=>setStars(2)}>★</div>
-                    <div className="starButton3" onClick={()=>setStars(3)}>★</div>
-                    <div className="starButton4" onClick={()=>setStars(4)}>★</div>
-                    <div className="starButton5" onClick={()=>setStars(5)}>★</div>
+                    <div id="starButton1" onClick={()=>setStars(1)}>★</div>
+                    <div id="starButton2" onClick={()=>setStars(2)}>★</div>
+                    <div id="starButton3" onClick={()=>setStars(3)}>★</div>
+                    <div id="starButton4" onClick={()=>setStars(4)}>★</div>
+                    <div id="starButton5" onClick={()=>setStars(5)}>★</div>
                     Stars
                 </div>
                 {/* {Object.keys(errors).length > 0 && (

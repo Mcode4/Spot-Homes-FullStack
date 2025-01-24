@@ -42,6 +42,7 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "visible" : " hidden");
 
+
   return (
     <div id='profileDiv'>
       <button onClick={toggleMenu}>
@@ -49,7 +50,7 @@ function ProfileButton({ user }) {
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
+          <div className='profileInfo'>
             {/* <li>Hello {user.username}</li> */}
             <li>Hello, {user.firstName}</li> {/*{user.lastName}*/}
             <li>{user.email}</li>
@@ -62,7 +63,7 @@ function ProfileButton({ user }) {
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
-          </>
+          </div>
         ) : (
           <>
             <li>

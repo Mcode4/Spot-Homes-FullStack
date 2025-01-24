@@ -8,8 +8,8 @@ import './ManageReviews.css'
 
 function ManageReviews(){
     const dispatch = useDispatch()
-    const reviews = useSelector(state=> state.review.reviews.Reviews)
-    console.log('REVIEWS', reviews)
+    const reviews = useSelector(state=> state.review.reviews)
+    // console.log('REVIEWS', reviews)
 
     useEffect(()=>{
         dispatch(reviewActions.loadReviews())

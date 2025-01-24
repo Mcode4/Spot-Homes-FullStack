@@ -1,0 +1,15 @@
+#reviewForm{
+    display: grid;
+    width: 250px;
+    justify-items: center;
+    gap: 10px;
+}
+
+#review{
+    height: 100px;
+    width: 100%;
+}
+#stars{
+    display: flex;
+    gap: 10px;
+}

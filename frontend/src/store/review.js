@@ -33,7 +33,8 @@ const removeReviewAction = (payload) =>{
 export const loadReviews = () => async(dispatch)=>{
     const res = await csrfFetch('/api/reviews/current')
     const data = await res.json()
-    dispatch(loadReviewsAction(data))
+    // console.log('LOADDATA', data.Reviews)
+    dispatch(loadReviewsAction(data.Reviews))
     return res
 }
 
@@ -70,7 +71,8 @@ export const deleteReview = (id)=> async(dispatch)=>{
     const res = await csrfFetch(`/api/reviews/${id}`, {
         method: 'DELETE'
     })
-    const data = res.json()
+    const data = await res.json()
+    console.log('DELETED DATA', data)
 
     dispatch(removeReviewAction(data))
     return res
