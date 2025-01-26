@@ -58,7 +58,6 @@ function SpotPage(){
             // console.log(newValue)
             spotData.displayRating = newValue
         }
-        else spotData.displayRating = Number(string)
     }
 
     let verify = (reviewUser)=>{

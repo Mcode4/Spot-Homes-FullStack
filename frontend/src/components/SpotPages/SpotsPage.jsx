@@ -85,7 +85,6 @@ function SpotsPage(){
                     // console.log(newValue)
                     spot.displayRating = newValue
                 }
-                else spot.displayRating = Number(string)
             }
             
         })
