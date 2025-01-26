@@ -137,9 +137,10 @@ export const deleteSpot = (id)=> async(dispatch)=>{
     const res = await csrfFetch(`/api/spots/${id}`, {
         method: 'DELETE'
     })
-    const data = res.json()
+    const data = await res.json()
+    console.log('DELETED', data)
 
-    dispatch(removeSpotAction(data))
+    dispatch(removeSpotAction(id))
     return res
 }
 

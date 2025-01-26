@@ -9,18 +9,18 @@ import './SpotPage.css'
 
 function SpotPage(){
     const [showMenu, setShowMenu] = useState(false)
-
     const { id }= useParams()
     const dispatch = useDispatch()
+    const state = useSelector(state=> state)
+    const spotData = state.spot.spotData.spotData
+    const reviewData = state.spot.spotData.reviewData
+    const user = state.session.user
 
     useEffect(()=>{
         dispatch(spotActions.loadSpotData(id))
     }, [dispatch, id])
 
-    const state = useSelector(state=> state)
-    const spotData = state.spot.spotData.spotData
-    const reviewData = state.spot.spotData.reviewData
-    const user = state.session.user
+    
     // console.log(user)
 
     if(!spotData){
@@ -29,7 +29,7 @@ function SpotPage(){
         )
     }
 
-    if(spotData.avgStarRating === undefined || spotData.avgStarRating === null){
+    if(spotData.avgStarRating === undefined || spotData.avgStarRating === null || spotData.avgStarRating === 'null'){
         spotData.avgStarRating = 0
         spotData.displayRating = 'new'
     } else if(spotData.avgStarRating === 0 || spotData.avgStarRating === '0'){
@@ -150,11 +150,11 @@ function SpotPage(){
                                 <div className="reviewActions">
                                     <OpenModalButton
                                         buttonText="Update"
-                                        modalComponent={<ReviewFormModal id={review.id} spot={spotData.name} />}
+                                        modalComponent={<ReviewFormModal id={review.id} spot={spotData} />}
                                     />
                                     <OpenModalButton
                                         buttonText="Delete"
-                                        modalComponent={<DeleteFormModal id={review.id} type={'Review'} />}
+                                        modalComponent={<DeleteFormModal id={review.id} type={'Review'} page={['Spot', id]} />}
                                     />
                                 </div>
                             )}

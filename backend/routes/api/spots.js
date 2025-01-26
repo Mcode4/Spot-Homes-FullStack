@@ -346,7 +346,81 @@ router.get('/', async (req, res)=>{
     })
 });
 
+router.post('/:spotId/reviews', async (req,res)=>{
+    const {user} = req;
+    if(!user){
+        res.status(401);
+        return res.json({
+         "message": "havent log in"
+       })
+     }
+   
+        const {review, stars} = req.body;
+        const spotid = req.params.spotId;
 
+        spotid.split("").forEach(el=>{
+            if(!'0123456789'.includes(el)){
+                res.status(404);
+                return res.json({
+                  "message": "Spot couldn't be found"
+                });
+              }
+        })
+        const foundSpot = await Spot.findOne({
+            where:{
+                id:Number(spotid)
+            },
+            include:{
+                model:Review
+            }
+        });
+        if(!foundSpot){
+            res.status(404);
+                return res.json({
+                  "message": "Spot couldn't be found"
+                });
+        }
+
+        console.log('==>',foundSpot);
+
+        if(!review || !stars){
+            res.status(400);
+          
+            return res.json(
+                {
+                    "message": "Bad Request", 
+                    "errors": {
+                      "review": "Review text is required",
+                      "stars": "Stars must be an integer from 1 to 5",
+                    }
+                  }
+            )
+        }
+    //   console.log("foundSpot.review",foundSpot.review);
+
+        foundSpot.Reviews.forEach(el=>{
+            if(el.userId===user.id) {
+     res.status(500);
+                return res.json({
+                      "message":
+            "User already has a review for this spot"})
+            }
+        })
+           
+            
+  
+            const newReview = await Review.create({
+                "userId":user.id,"spotId":Number(spotid),review, stars
+            });
+            res.status(201);
+            res.setHeader("Content-Type","application/json")
+            return res.json(
+                newReview 
+            )
+           
+           
+
+})
 
 router.post('/:spotId/images',async (req,res)=>{
     const {user} = req;
@@ -480,81 +554,7 @@ router.post('/:spotId/bookings', requireAuth,async (req, res)=>{
 
 
 
-router.post('/:spotId/reviews', async (req,res)=>{
-    const {user} = req;
-    if(!user){
-        res.status(401);
-        return res.json({
-         "message": "havent log in"
-       })
-     }
-   
-        const {review, stars} = req.body;
-        const spotid = req.params.spotId;
 
-        spotid.split("").forEach(el=>{
-            if(!'0123456789'.includes(el)){
-                res.status(404);
-                return res.json({
-                  "message": "Spot couldn't be found"
-                });
-              }
-        })
-        const foundSpot = await Spot.findOne({
-            where:{
-                id:Number(spotid)
-            },
-            include:{
-                model:Review
-            }
-        });
-        if(!foundSpot){
-            res.status(404);
-                return res.json({
-                  "message": "Spot couldn't be found"
-                });
-        }
-
-        console.log('==>',foundSpot);
-
-        if(!review || !stars){
-            res.status(400);
-          
-            return res.json(
-                {
-                    "message": "Bad Request", 
-                    "errors": {
-                      "review": "Review text is required",
-                      "stars": "Stars must be an integer from 1 to 5",
-                    }
-                  }
-            )
-        }
-    //   console.log("foundSpot.review",foundSpot.review);
-
-        foundSpot.Reviews.forEach(el=>{
-            if(el.userId===user.id) {
-     res.status(500);
-                return res.json({
-                      "message":
-            "User already has a review for this spot"})
-            }
-        })
-           
-            
-  
-            const newReview = await Review.create({
-                "userId":user.id,"spotId":Number(spotid),review, stars
-            });
-            res.status(201);
-            res.setHeader("Content-Type","application/json")
-            return res.json(
-                newReview 
-            )
-           
-           
-
-})
 
 router.post('/',requireAuth,async (req, res)=>{
 
@@ -650,7 +650,7 @@ router.put('/:spotId', async (req, res)=>{
         if(description) theSpot.description=description;
         if(price) theSpot.price=price;
 
-    
+        theSpot.save()
         res.status(200);
         res.json(theSpot);
     }catch(error){

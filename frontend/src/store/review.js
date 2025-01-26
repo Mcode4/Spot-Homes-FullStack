@@ -48,6 +48,7 @@ export const postReview = (data) => async (dispatch)=>{
         })
     })
     const reviewData = await res.json()
+    console.log('POST REVIEW', reviewData)
 
     dispatch(createReviewAction(reviewData))
     return res
@@ -74,7 +75,7 @@ export const deleteReview = (id)=> async(dispatch)=>{
     const data = await res.json()
     console.log('DELETED DATA', data)
 
-    dispatch(removeReviewAction(data))
+    dispatch(removeReviewAction(id))
     return res
 }
 
