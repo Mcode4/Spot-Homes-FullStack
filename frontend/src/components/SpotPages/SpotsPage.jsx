@@ -85,6 +85,10 @@ function SpotsPage(){
                     // console.log(newValue)
                     spot.displayRating = newValue
                 }
+                else spot.displayRating = spot.avgRating
+
+                console.log('RATINGS', spot.avgRating)
+                console.log('DISPLAY RATINGS', spot.displayRating)
             }
             
         })

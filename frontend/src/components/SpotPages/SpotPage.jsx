@@ -58,6 +58,10 @@ function SpotPage(){
             // console.log(newValue)
             spotData.displayRating = newValue
         }
+        else spotData.displayRating = spotData.avgRating
+
+        console.log('RATING', spotData.avgRating)
+        console.log('DISPLAY RATING', spotData.displayRating)
     }
 
     let verify = (reviewUser)=>{
