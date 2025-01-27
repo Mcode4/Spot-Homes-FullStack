@@ -5,24 +5,26 @@ import * as spotActions from '../../store/spot'
 import './EditSpotForm.css'
 
 function EditSpot(){
-    const [country, setCountry] = useState('') 
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [lat, setLat] = useState('')
-    const [lng, setLng] = useState('')
-    const [description, setDescription] = useState('')
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
-    const [image1, setImage1] = useState('')
-    const [image2, setImage2] = useState('')
-    const [image3, setImage3] = useState('')
-    const [image4, setImage4] = useState('')
-
     const dispatch = useDispatch()
     const { id } = useParams()
     const spotData = useSelector(state => state.spot.spotData.spotData)
+
+    const [country, setCountry] = useState(spotData?.country) 
+    const [address, setAddress] = useState(spotData?.address)
+    const [city, setCity] = useState(spotData?.city)
+    const [state, setState] = useState(spotData?.state)
+    const [lat, setLat] = useState(spotData?.lat)
+    const [lng, setLng] = useState(spotData?.lng)
+    const [description, setDescription] = useState(spotData?.description)
+    const [name, setName] = useState(spotData?.name)
+    const [price, setPrice] = useState(spotData?.price)
+    const [previewImage, setPreviewImage] = useState(spotData?.SpotImages[0].url)
+    const [image1, setImage1] = useState(spotData?.SpotImages[1]?.url)
+    const [image2, setImage2] = useState(spotData?.SpotImages[2]?.url)
+    const [image3, setImage3] = useState(spotData?.SpotImages[3]?.url)
+    const [image4, setImage4] = useState(spotData?.SpotImages[4]?.url)
+
+    
     useEffect(()=>{
         dispatch(spotActions.loadSpotData(id))
     }, [dispatch, id])
@@ -34,17 +36,17 @@ function EditSpot(){
         )
     }
 
-    let previewImg = spotData.SpotImages[0].url
-    const images = ['', '', '', '']
-    let index = 0
+    // let previewImg = spotData.SpotImages[0].url
+    // const images = ['', '', '', '']
+    // let index = 0
 
-    spotData.SpotImages.forEach((image, i)=>{
-        if(i !== 0){
-            images.splice(index, 1, `${image.url}`)
-            index++
-        }
-    })
-    index = 0
+    // spotData.SpotImages.forEach((image, i)=>{
+    //     if(i !== 0){
+    //         images.splice(index, 1, `${image.url}`)
+    //         index++
+    //     }
+    // })
+    // index = 0
 
     // useEffect(()=>{
     //     setCountry(`${spotData.country}`) 
@@ -62,25 +64,25 @@ function EditSpot(){
     //     setImage3(`${images[2]}`)
     //     setImage4(`${images[3]}`)
     // }, [spotData, previewImg, images])
-    
-    const setValues = ()=>{
-        setCountry(`${spotData.country}`) 
-        setAddress(`${spotData.address}`)
-        setCity(`${spotData.city}`)
-        setState(`${spotData.state}`)
-        setLat(`${spotData.lat}`)
-        setLng(`${spotData.lng}`)
-        setDescription(`${spotData.description}`)
-        setName(`${spotData.name}`)
-        setPrice(`${spotData.price}`)
-        setPreviewImage(`${previewImg}`)
-        setImage1(`${images[0]}`)
-        setImage2(`${images[1]}`)
-        setImage3(`${images[2]}`)
-        setImage4(`${images[3]}`)
-    }
 
-    setValues()
+    // const setValues = ()=>{
+    //     setCountry(`${spotData.country}`) 
+    //     setAddress(`${spotData.address}`)
+    //     setCity(`${spotData.city}`)
+    //     setState(`${spotData.state}`)
+    //     setLat(`${spotData.lat}`)
+    //     setLng(`${spotData.lng}`)
+    //     setDescription(`${spotData.description}`)
+    //     setName(`${spotData.name}`)
+    //     setPrice(`${spotData.price}`)
+    //     setPreviewImage(`${previewImg}`)
+    //     setImage1(`${images[0]}`)
+    //     setImage2(`${images[1]}`)
+    //     setImage3(`${images[2]}`)
+    //     setImage4(`${images[3]}`)
+    // }
+
+    // setValues()
     
     // const errors = {}
 
