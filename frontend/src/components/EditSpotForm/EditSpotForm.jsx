@@ -25,7 +25,7 @@ function EditSpot(){
     const spotData = useSelector(state => state.spot.spotData.spotData)
     useEffect(()=>{
         dispatch(spotActions.loadSpotData(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
     
     if(!spotData){
@@ -46,20 +46,41 @@ function EditSpot(){
     })
     index = 0
 
-    setCountry(`${spotData.country}`) 
-    setAddress(`${spotData.address}`)
-    setCity(`${spotData.city}`)
-    setState(`${spotData.state}`)
-    setLat(`${spotData.lat}`)
-    setLng(`${spotData.lng}`)
-    setDescription(`${spotData.description}`)
-    setName(`${spotData.name}`)
-    setPrice(`${spotData.price}`)
-    setPreviewImage(`${previewImg}`)
-    setImage1(`${images[0]}`)
-    setImage2(`${images[1]}`)
-    setImage3(`${images[2]}`)
-    setImage4(`${images[3]}`)
+    // useEffect(()=>{
+    //     setCountry(`${spotData.country}`) 
+    //     setAddress(`${spotData.address}`)
+    //     setCity(`${spotData.city}`)
+    //     setState(`${spotData.state}`)
+    //     setLat(`${spotData.lat}`)
+    //     setLng(`${spotData.lng}`)
+    //     setDescription(`${spotData.description}`)
+    //     setName(`${spotData.name}`)
+    //     setPrice(`${spotData.price}`)
+    //     setPreviewImage(`${previewImg}`)
+    //     setImage1(`${images[0]}`)
+    //     setImage2(`${images[1]}`)
+    //     setImage3(`${images[2]}`)
+    //     setImage4(`${images[3]}`)
+    // }, [spotData, previewImage, images])
+    const setValues = ()=>{
+        setCountry(`${spotData.country}`) 
+        setAddress(`${spotData.address}`)
+        setCity(`${spotData.city}`)
+        setState(`${spotData.state}`)
+        setLat(`${spotData.lat}`)
+        setLng(`${spotData.lng}`)
+        setDescription(`${spotData.description}`)
+        setName(`${spotData.name}`)
+        setPrice(`${spotData.price}`)
+        setPreviewImage(`${previewImg}`)
+        setImage1(`${images[0]}`)
+        setImage2(`${images[1]}`)
+        setImage3(`${images[2]}`)
+        setImage4(`${images[3]}`)
+    }
+
+    setValues()
+    
     // const errors = {}
 
 

@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useState } from "react"
+import { useDispatch} from "react-redux"
 import * as spotActions from '../../store/spot'
 import './CreateSpotForm.css'
 
@@ -20,6 +19,7 @@ function CreateSpot(){
     const [image3, setImage3] = useState('')
     const [image4, setImage4] = useState('')
     // const errors = {}
+    const dispatch = useDispatch()
 
     const onSumbit = (e)=>{
         e.preventDefault()
