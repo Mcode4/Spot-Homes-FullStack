@@ -74,8 +74,7 @@ function SpotsPage(){
                     
                     if(num2 >= 5) num1 += 1
     
-                    newValue = `${split[0]}.${num1}` 
-                    newValue = Number(newValue)
+                    newValue = `${split[0]}.${num1}`
                     
                     spot.displayRating = newValue
                 } 
