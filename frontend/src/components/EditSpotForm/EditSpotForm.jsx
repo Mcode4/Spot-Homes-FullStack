@@ -23,20 +23,20 @@ function EditSpot(){
     const dispatch = useDispatch()
     const { id } = useParams()
     const spotData = useSelector(state => state.spot.spotData.spotData)
-    let previewImg = spotData.SpotImages[0].url
-    const images = ['', '', '', '']
-    let index = 0
-
     useEffect(()=>{
         dispatch(spotActions.loadSpotData(id))
-    }, [dispatch, id])
+    }, [dispatch])
 
-
+    
     if(!spotData){
         return(
             <h1>Page Loading...</h1>
         )
     }
+
+    let previewImg = spotData.SpotImages[0].url
+    const images = ['', '', '', '']
+    let index = 0
 
     spotData.SpotImages.forEach((image, i)=>{
         if(i !== 0){
