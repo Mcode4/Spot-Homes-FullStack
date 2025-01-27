@@ -19,10 +19,10 @@ function EditSpot(){
     const [name, setName] = useState(spotData?.name || '')
     const [price, setPrice] = useState(spotData?.price || '')
     const [previewImage, setPreviewImage] = useState(spotData?.SpotImages[0].url || '')
-    const [image1, setImage1] = useState(spotData?.SpotImages[1].url || '')
-    const [image2, setImage2] = useState(spotData?.SpotImages[2].url || '')
-    const [image3, setImage3] = useState(spotData?.SpotImages[3].url || '')
-    const [image4, setImage4] = useState(spotData?.SpotImages[4].url || '')
+    const [image1, setImage1] = useState(spotData?.SpotImages[1]?.url || '')
+    const [image2, setImage2] = useState(spotData?.SpotImages[2]?.url || '')
+    const [image3, setImage3] = useState(spotData?.SpotImages[3]?.url || '')
+    const [image4, setImage4] = useState(spotData?.SpotImages[4]?.url || '')
 
     
     useEffect(()=>{
