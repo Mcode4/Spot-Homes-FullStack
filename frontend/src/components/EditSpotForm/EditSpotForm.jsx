@@ -61,7 +61,8 @@ function EditSpot(){
     //     setImage2(`${images[1]}`)
     //     setImage3(`${images[2]}`)
     //     setImage4(`${images[3]}`)
-    // }, [spotData, previewImage, images])
+    // }, [spotData, previewImg, images])
+    
     const setValues = ()=>{
         setCountry(`${spotData.country}`) 
         setAddress(`${spotData.address}`)
