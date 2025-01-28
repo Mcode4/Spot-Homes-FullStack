@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch} from "react-redux"
+import { NavLink } from "react-router-dom"
 import * as spotActions from '../../store/spot'
 import './CreateSpotForm.css'
 
@@ -40,7 +41,7 @@ function CreateSpot(){
         // address, city, state, country, lat, lng, name,description, price
         console.log('FORM', form)
 
-        dispatch(spotActions.createSpot(form))
+        dispatch(spotActions.createSpot(form)).then(spotActions.loadCurrentSpots())
     }
     return (
         <div id="createPage">
@@ -105,7 +106,7 @@ function CreateSpot(){
                     <input className="input" type="text" placeholder="Image Url" onChange={(e)=>setImage3(e.target.value)} value={image3} />
                     <input className="input" type="text" placeholder="Image Url" onChange={(e)=>setImage4(e.target.value)} value={image4} />
                 </div>
-                <button type="submit">Create Spot</button>
+                <button type="submit"><NavLink to={'/spots/current'}>Create Spot</NavLink></button>
             </form>
         </div>
     )
