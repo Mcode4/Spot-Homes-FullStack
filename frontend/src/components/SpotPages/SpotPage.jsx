@@ -104,16 +104,18 @@ function SpotPage(){
             </header>
             <section id="s1">
                 <div id="mPic">
-                    <img src={spotData.SpotImages[0].url} alt="bigImg" className="bigImg" />
+                    <img src={spotData.SpotImages[0]?.url} alt="Main Img" className="bigImg" />
                 </div>
-                <div id="oPic">
-                {spotData.SpotImages.map((image, i) => {
-                    if (i !== 0) {
-                    return <img src={image.url} alt="smallImg" className="smallImg" key={image.id} />;
-                    }
-                    return null; // This ensures the first image is not rendered
-                })}
-                </div>
+                {spotData.SpotImages[1].url !== '' && (
+                    <div id="oPic">
+                        {spotData.SpotImages.map((image, i) => {
+                            if (i !== 0) {
+                            return <img src={image.url} alt="Other Images" className="smallImg" key={image.id} />;
+                            }
+                            return null; // This ensures the first image is not rendered
+                        })}
+                    </div>
+                )}
             </section>
 
             <section id="s2">

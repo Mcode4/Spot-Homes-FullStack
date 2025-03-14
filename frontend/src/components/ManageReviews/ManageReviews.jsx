@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import OpenModalButton from "../OpenModalButton"
 import ReviewFormModal from "../ReviewFormModal"
 import DeleteFormModal from "../DeleteFormModals"
@@ -10,6 +11,11 @@ function ManageReviews(){
     const dispatch = useDispatch()
     const reviews = useSelector(state=> state.review.reviews)
     // console.log('REVIEWS', reviews)
+    const navigate = useNavigate()
+    const sessionUser = useSelector(state => state.session.user);
+    if(!sessionUser){
+        navigate('/')
+    }
 
     useEffect(()=>{
         dispatch(reviewActions.loadReviews())

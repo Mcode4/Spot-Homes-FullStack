@@ -72,8 +72,8 @@ export const loadSpotData = (spotId) => async (dispatch) =>{
     return res && res2
 }
 
-export const loadCurrentSpots = () => async(dispatch)=>{
-    const res = await fetch('/api/spots/current')
+export const loadCurrentSpots = (user) => async(dispatch)=>{
+    const res = await fetch(`/api/spots/current/${user.id}`)
     const data = await res.json()
     // console.log('DATA', data)
     dispatch(loadCurrDataAction(data.Spots))
@@ -164,7 +164,9 @@ const spotReducer = (state = initialState, action) =>{
         case CREATE_SPOT:
             return {...state, spots: [...state.spots, action.payload]}
         case REMOVE_SPOT:
-            return {...state, spots: state.spots.filter((spot)=> spot.id !== action.payload.id)}
+            return {...state, spots: state.spots.filter((spot)=>
+                spot.id !== action.payload
+            )}
         default:
             return state
     }

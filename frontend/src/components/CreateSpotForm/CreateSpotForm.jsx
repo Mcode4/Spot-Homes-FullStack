@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { useDispatch} from "react-redux"
-import { NavLink } from "react-router-dom"
+import { useDispatch, useSelector} from "react-redux"
+import { NavLink, useNavigate } from "react-router-dom"
 import * as spotActions from '../../store/spot'
 import './CreateSpotForm.css'
 
@@ -21,6 +21,11 @@ function CreateSpot(){
     const [image4, setImage4] = useState('')
     // const errors = {}
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const sessionUser = useSelector(state => state.session.user);
+    if(!sessionUser){
+        navigate('/')
+    }
 
     const onSumbit = (e)=>{
         e.preventDefault()
@@ -82,7 +87,7 @@ function CreateSpot(){
                 <div id="setDescription" className="formOption">
                     <div>Describe your place to guests</div>
                     <div>Mention the best feature of your space, any special amenities like fast wifi or parking, and what you love about the neighborbood.</div>
-                    <textarea name="input" className="input" id="descriptionInput" placeholder="Please write at least 30 characters" onChange={(e)=>setDescription(e.target.value)} value={description}></textarea>
+                    <textarea required name="input" className="input" id="descriptionInput" placeholder="Please write at least 30 characters" onChange={(e)=>setDescription(e.target.value)} value={description}></textarea>
                 </div>
 
                 <div id="setTitle" className="formOption">

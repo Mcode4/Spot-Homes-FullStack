@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import OpenModalButton from '../OpenModalButton'
@@ -8,51 +8,54 @@ import './ManageSpots.css'
 
 function ManageSpots(){
     const dispatch = useDispatch()
+    const user = useSelector(state => state.session.user)
+    const navigate = useNavigate()
+    console.log('USERRR', user)
+
+    if(!user){
+        navigate('/')
+      }
 
     useEffect(()=>{
-        dispatch(spotActions.loadCurrentSpots())
+        dispatch(spotActions.loadCurrentSpots(user))
     }, [dispatch])
 
     const userSpots = useSelector(state => state.spot.currData)
 
-    if(!userSpots){
-        return (
-            <h1>Page Loading...</h1>
-        )
-    }
+    if(userSpots && userSpots.length > 0){
+        userSpots.forEach(spot=>{
+            if(spot.avgRating === undefined || spot.avgRating === null){
+                spot.avgRating = 0
+                spot.displayRating = 'new'
+            } else if(spot.avgRating === 0 || spot.avgRating === '0'){
+                spot.avgRating = 0
+                spot.displayRating = 'new'
+            } else {
+                const string = `${spot.avgRating}`
+                let newValue
 
-    userSpots.forEach(spot=>{
-        if(spot.avgRating === undefined || spot.avgRating === null){
-            spot.avgRating = 0
-            spot.displayRating = 'new'
-        } else if(spot.avgRating === 0 || spot.avgRating === '0'){
-            spot.avgRating = 0
-            spot.displayRating = 'new'
-        } else {
-            const string = `${spot.avgRating}`
-            let newValue
+                if(string.length > 3 && string.includes('.')){
+                    const split = string.split('.')
+                    let newString = split[1]
+                    let num1 = Number(newString[0])
+                    let num2 = Number(newString[1])
+                    
+                    if(num2 >= 5) num1 += 1
 
-            if(string.length > 3 && string.includes('.')){
-                const split = string.split('.')
-                let newString = split[1]
-                let num1 = Number(newString[0])
-                let num2 = Number(newString[1])
-                
-                if(num2 >= 5) num1 += 1
-
-                newValue = `${split[0]}.${num1}`
-                
-                spot.displayRating = newValue
-            } 
-            else if(!string.includes('.')){
-                // console.log('FLAG', string)
-                newValue = `${string}.0`
-                // console.log(newValue)
-                spot.displayRating = newValue
+                    newValue = `${split[0]}.${num1}`
+                    
+                    spot.displayRating = newValue
+                } 
+                else if(!string.includes('.')){
+                    // console.log('FLAG', string)
+                    newValue = `${string}.0`
+                    // console.log(newValue)
+                    spot.displayRating = newValue
+                }
+                else spot.displayRating = Number(string)
             }
-            else spot.displayRating = Number(string)
-        }
-    })
+        })
+    }
 
     return (
         <div id="ManagePage">
@@ -63,7 +66,7 @@ function ManageSpots(){
                 </button>
             </div>
             <div id="manageContainer">
-                {userSpots.map((spot)=> (
+                {userSpots?.map((spot)=> (
                     <div className="spots" key={spot.id}>
                         <NavLink to={`/spots/${spot.id}`} className='spotHolder'>
                             <div className="imgContainer">

@@ -101,7 +101,7 @@ function SpotsPage(){
                 <NavLink to={`spots/${spot.id}`} key={spot.id}>
                     <button className="container">
                             <div className="imageHolder">
-                                <img className="img" src={spot.previewImage.url} alt="No Image Shown" />
+                                <img className="img" src={spot.previewImage?.url} alt="No Image Shown" />
                             </div>
                             <div className="infoHolder">
                                 <div className="location">{`${spot.city}, ${spot.state}`}</div>

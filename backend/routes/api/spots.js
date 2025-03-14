@@ -69,12 +69,15 @@ router.get('/:spotId/reviews', async (req, res)=>{
 })
 
 
-router.get('/current', async (req, res)=>{
-    
+router.get('/current/:id', async (req, res)=>{
+    console.log('RESSSSSS', req)
     // console.log(secretKey);
-    const { user } = req;
+    const { id } = req.params
     // console.log(user);
-  
+    console.log('IDD', id)
+
+    const user = await User.findByPk(Number(id));
+    console.log('USERRR', user)
   
     if(user){
 
@@ -84,64 +87,62 @@ router.get('/current', async (req, res)=>{
             ownerId: user.id
            }
         });
-    //    const foundReviewsCount = await Review.count({
-    //     where: {spotId:foundSpot.id}
-    //    });
 
-    if(!foundSpot[0]) {
-        res.setHeader('Content-Type','application/json');
-        res.status(401);
-        return res.json(user)
-    }
+        if(!foundSpot[0]) {
+            res.setHeader('Content-Type','application/json');
+            res.status(404);
+            return res.json({
+                "message": "User doesn't have any spots"})
+        }
 
-    let results = [];
+        let results = [];
 
-    for (let foundSpotEl of foundSpot){
+        for (let foundSpotEl of foundSpot){
 
-        const foundAverageStars = await Review.findOne({
-            attributes: [
-               [sequelize.fn('AVG', sequelize.col('stars')), 'avgStarRating']
-            ],
-            where: {
-               spotId: foundSpotEl.id
-            }
-         });
-         
-             let newfoundspot = foundSpotEl.toJSON();
-             newfoundspot['avgRating'] = foundAverageStars? foundAverageStars.toJSON().avgStarRating :null;
-         
-         // console.log(foundAverageStars);
-         
-            const foundSpotImg = await SpotImage.findOne({
-             where:{
-                 spotId: foundSpotEl.id
-             }
+            const foundAverageStars = await Review.findOne({
+                attributes: [
+                [sequelize.fn('AVG', sequelize.col('stars')), 'avgStarRating']
+                ],
+                where: {
+                spotId: foundSpotEl.id
+                }
             });
-             
+            
+            let newfoundspot = foundSpotEl.toJSON();
+            newfoundspot['avgRating'] = foundAverageStars? foundAverageStars.toJSON().avgStarRating :null;
+            
+            // console.log(foundAverageStars);
+            
+            const foundSpotImg = await SpotImage.findOne({
+                where:{
+                    spotId: foundSpotEl.id
+                }
+            });
+                
             console.log(foundSpotImg);
-         //    newfoundspot['previewImage'] = foundSpotImg?foundSpotImg.toJSON().previewImage:null;
-         // console.log(foundSpotImg)
-             // newfoundspot['previewImage'] = null;
-             if(foundSpotImg){
-                 newfoundspot['previewImage'] =foundSpotImg.toJSON().url;
-             }else{
-                 newfoundspot['previewImage'] = null;
-             }
+            //    newfoundspot['previewImage'] = foundSpotImg?foundSpotImg.toJSON().previewImage:null;
+            // console.log(foundSpotImg)
+                // newfoundspot['previewImage'] = null;
+                if(foundSpotImg){
+                    newfoundspot['previewImage'] =foundSpotImg.toJSON().url;
+                }else{
+                    newfoundspot['previewImage'] = null;
+                }
 
-             results.push( newfoundspot);
+                results.push( newfoundspot);
     }
   
 
-      res.setHeader('Content-Type','application/json');
-      res.json({
-         "Spots":  results   
-      });
-  
-      }
-      else{
-        res.setHeader('Content-Type','application/json');
-        res.status(401);
-        return res.json(user)
+    res.setHeader('Content-Type','application/json');
+    res.json({
+        "Spots":  results   
+    });
+
+    }
+    else{
+    res.setHeader('Content-Type','application/json');
+    res.status(401);
+    return res.json(user)
     }
     
     return res.json(user)
@@ -674,6 +675,7 @@ router.put('/:spotId', async (req, res)=>{
 
 router.delete('/:spotId', async (req, res)=>{
     const {user} = req;
+
     if(!user){
           res.status(401);
           return res.json({
@@ -694,13 +696,12 @@ router.delete('/:spotId', async (req, res)=>{
         res.status(200);
         return res.json({
             "message": "Successfully deleted"
-          })
+        })
     }
     res.status(404);
     return res.json({
         "message": "Spot couldn't be found"
-      })
-   
+    })
 })
 
 

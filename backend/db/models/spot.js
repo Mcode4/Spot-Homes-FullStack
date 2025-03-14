@@ -19,44 +19,51 @@ module.exports = (sequelize, DataTypes) => {
   Spot.init({
     ownerId:{
       type:DataTypes.INTEGER,
-      allowNull:false
+      allowNull:false,
     },
     address: {
-      type:DataTypes.STRING
+      type:DataTypes.STRING,
+      allowNull:false,
     },
     city: {
-      type:DataTypes.STRING
+      type:DataTypes.STRING,
+      allowNull:false,
     },
     state: {
-      type:DataTypes.STRING
+      type:DataTypes.STRING,
+      allowNull:false,
     },
     country: {
-      type:DataTypes.STRING},
+      type:DataTypes.STRING,
+      allowNull:false,
+    },
     lat: {
       type:DataTypes.DECIMAL,
       validate:{
         len:[-90,90]
-      }
+      },
     },
     lng: {
       type:DataTypes.DECIMAL,
       validate:{
         len:[-180,180]
-      }
+      },
     },
     name: {
       type:DataTypes.STRING(50),
-      unique:true
+      unique:true,
     },
     description: {
-      type:DataTypes.STRING},
+      type:DataTypes.STRING,
+      allowNull:false,
+    },
     price: {
       type:DataTypes.DECIMAL,
       validate:{
         isPositive(value){
              if(value<=0) throw new Error('price is larger than 0');
         }
-      }
+      },
     }
   }, {
     sequelize,
