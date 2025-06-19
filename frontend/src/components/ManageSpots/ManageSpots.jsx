@@ -18,7 +18,7 @@ function ManageSpots(){
 
     useEffect(()=>{
         dispatch(spotActions.loadCurrentSpots(user))
-    }, [dispatch])
+    }, [dispatch, user])
 
     const userSpots = useSelector(state => state.spot.currData)
 

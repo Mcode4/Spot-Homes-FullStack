@@ -1,12 +1,12 @@
 import { useModal } from "../../context/Modal"
-import { useDispatch, useSelector} from "react-redux"
+import { useDispatch} from "react-redux"
 import * as spotActions from '../../store/spot'
 import * as reviewActions from '../../store/review'
 
 function DeleteFormModal({type, id, page}){
     const dispatch = useDispatch()
     const {closeModal} = useModal()
-    const user = useSelector(state => state.session.user)
+    // const user = useSelector(state => state.session.user)
     let deleteMessage = 'Are you sure you want to remove this spot from the listings'
     let deleteButtonText= ['Yes (Delete Spot)', 'No (Keep Spot)']
     let deleteFunc
