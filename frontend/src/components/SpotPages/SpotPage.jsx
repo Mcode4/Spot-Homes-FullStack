@@ -96,6 +96,8 @@ function SpotPage(){
         setShowMenu(false)
     }
 
+    console.log('IMAGES', spotData.SpotImages)
+
     return(
         <div id="page">
             <header>
@@ -104,13 +106,13 @@ function SpotPage(){
             </header>
             <section id="s1">
                 <div id="mPic">
-                    <img src={spotData.SpotImages[0]?.url} alt="Main Img" className="bigImg" />
+                    <img src={spotData.SpotImages[0].url} alt="Main Img" className="bigImg" />
                 </div>
-                {spotData.SpotImages[1].url !== '' && (
+                {spotData.SpotImages[1]?.url !== '' && (
                     <div id="oPic">
                         {spotData.SpotImages.map((image, i) => {
                             if (i !== 0) {
-                            return <img src={image.url} alt="Other Images" className="smallImg" key={image.id} />;
+                            return <img src={image?.url} alt="Other Images" className="smallImg" key={image.id} />;
                             }
                             return null; // This ensures the first image is not rendered
                         })}
