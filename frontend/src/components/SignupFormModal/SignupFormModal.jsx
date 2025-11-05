@@ -45,82 +45,62 @@ function SignupFormModal() {
     <div className='signupModal'>
       <h1>Sign Up</h1>
       <form id='signupForm' onSubmit={handleSubmit}>
-        <div className='form'>
-          <div>
-            <input
-                placeholder='Email'
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className='i2'
-                required
-            />
-            {errors.email && <p>{errors.email}</p>}
-          </div>
-          <div>
-            <input
-                placeholder='Username'
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className='i2'
-                required
-            />
-            {errors.username && <p>{errors.username}</p>}
-          </div>
-          <div>
-            <input
-                placeholder='First Name'
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className='i2'
-                required
-            />
-            {errors.firstName && <p>{errors.firstName}</p>}
-          </div>
-          <div>
-            <input
-                placeholder='Last Name'
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className='i2'
-                required
-            />
-            {errors.lastName && <p>{errors.lastName}</p>}
-          </div>
-          <div>
-            <input
-                placeholder='Password'
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className='i2'
-                required
-            />
-            {errors.password && <p>{errors.password}</p>}
-          </div>
-          <div>
-            <input
-                placeholder='Confirm Password'
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className='i2'
-                required
-            />
-            {errors.confirmPassword && (
-              <p>{errors.confirmPassword}</p>
-            )}
-          </div>
-          
-          
-         
-          
-          
-          
-        </div>
+        <input
+              placeholder='Email'
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className='i2'
+              required
+        />
+        {errors.email && <p>{errors.email}</p>}
+        <input
+            placeholder='Username'
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className='i2'
+            required
+        />
+        {errors.username && <p>{errors.username}</p>}
+        <input
+            placeholder='First Name'
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className='i2'
+            required
+        />
+        {errors.firstName && <p>{errors.firstName}</p>}
+        <input
+            placeholder='Last Name'
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            className='i2'
+            required
+        />
+        {errors.lastName && <p>{errors.lastName}</p>}
+        <input
+            placeholder='Password'
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className='i2'
+            required
+        />
+        {errors.password && <p>{errors.password}</p>}
+        <input
+            placeholder='Confirm Password'
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className='i2'
+            required
+        />
+        {errors.confirmPassword && (
+          <p>{errors.confirmPassword}</p>
+        )}
         <button className='submitButton' type="submit">Sign Up</button>
       </form>
     </div>
