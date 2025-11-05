@@ -25,7 +25,7 @@ function ProfileButton({ user }) {
       return;
     }
 
-    background.style.backgroundColor = 'darkslategray';
+    background.style.backgroundColor = 'lightgray';
     const closeMenu = (e) => {
       if (!ulRef.current.contains(e.target)) {
         setShowMenu(false);

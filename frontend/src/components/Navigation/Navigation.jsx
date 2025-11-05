@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
     <ul id='navbar'>
       <li id='home'>
         <NavLink to="/">
-          <img src="/Rent-a-Spot.png" alt="Home" />
+          <img id='site-logo' src="../../../public/Rent-a-Spot.png" alt="Home" />
         </NavLink>
       </li>
       {isLoaded && (

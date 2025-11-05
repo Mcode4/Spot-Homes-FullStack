@@ -22,11 +22,12 @@ h1{
     justify-content: center;
 }
 
-input{
+#signupForm div input{
     height: 25px;
-    background-color:bisque;
+    background-color: lightgray;
     border-radius: 10px;
     justify-content: center;
+    border: none;
 }
 .submitButton{
     grid-column: span 2;
