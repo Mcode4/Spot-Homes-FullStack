@@ -1,4 +1,25 @@
 /* TODO: Add sitewide styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+button {
+    width: 100%;
+}
+
 button:hover{
     cursor: pointer;
 }

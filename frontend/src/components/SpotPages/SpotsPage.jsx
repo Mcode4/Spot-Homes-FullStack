@@ -51,6 +51,8 @@ function SpotsPage(){
     //     })
     // }, [spotData])
 
+    console.log('SPOTDATA', spotData)
+
     if(!spotData){
         return (
             <h1>Page Loading...</h1>
@@ -96,22 +98,40 @@ function SpotsPage(){
     
 
     return(
+        <>
+        <div id="country">
+            <button>United States</button>
+            <button>Canada</button>
+            <button>Europe</button>
+            <button>Asia</button>
+            <button>Other</button>
+        </div>
         <div id="holder">
            {spotData.map((spot)=> (
                 <NavLink to={`spots/${spot.id}`} key={spot.id}>
-                    <button className="container">
+                    <div className="container">
                             <div className="imageHolder">
                                 <img className="img" src={spot.previewImage?.url} alt="No Image Shown" />
                             </div>
-                            <div className="infoHolder">
-                                <div className="location">{`${spot.city}, ${spot.state}`}</div>
+                            <div className="info">
+                                <div>{spot.name}</div>
+                                <div style={{ marginLeft: 'auto' }}>★{spot.displayRating}</div>
+                            </div>
+                            <div>{`${spot.city}, ${spot.state}`}</div>
+                            <div>${spot.price}/day</div>
+
+                            {/* <div className="infoHolder">
+                                <div className="location">
+                                    {`${spot.city}, ${spot.state}`}
+                                </div>
                                 <div className="rating">★{spot.displayRating}</div>
                             </div>
-                            <div className="price">{`$${spot.price} night`}</div>
-                    </button>
+                            <div className="price">{`$${spot.price} night`}</div> */}
+                    </div>
                 </NavLink>
             ))}
         </div>
+        </>
     )
 }
 

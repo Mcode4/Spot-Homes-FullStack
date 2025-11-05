@@ -1,11 +1,71 @@
-#Navigations{
+/* Navagation Styles */
+#navbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+li {
+    list-style-type: none;
+}
+#profile {
+    display: flex;
+    position: absolute;
+    top: 2.5px;
+    right: 5px;
+    background-color: none;
+
+    height: fit-content;
+    padding: 2.5px;
+    border-radius: 10px;
+}
+
+
+/* Profile Button Styles */
+#profileDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+#profileButton {
+    width: '30px'; 
+    height: '30px'; 
+    border-radius: '50%';
+}
+
+.visible {
+    display: flex;
+    position: relative;
+    right: 20px;
+    flex-direction: column;
+}
+
+.login-buttons > button {
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+
+.hidden {
+    visibility: hidden;
+}
+
+/* #Navigations{
     height: 25px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border-bottom: 2px solid black;
     align-content: center;
-}
-#right-justified{
+} */
+
+/* #right-justified{
     display: flex;
     width: 100%;
     justify-content: flex-end;
@@ -24,13 +84,13 @@
     height: fit-content;
     width: 150px;
     height: 25px;
-    /* justify-self: self-end; */
-}
+    justify-self: self-end;
+} */
 
 
 
 /* Profile Button */
-#profileDiv{
+/* #profileDiv{
     width: 140px;
     justify-items: center;
     border-radius: 10px;
@@ -50,4 +110,4 @@ li{
 .hidden{
     display: flex;
     visibility: hidden;
-}
+} */

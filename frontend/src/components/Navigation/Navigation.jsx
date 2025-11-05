@@ -10,12 +10,14 @@ function Navigation({ isLoaded }) {
   
 
   return (
-    <ul id='Navigations'>
+    <ul id='navbar'>
       <li id='home'>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">
+          <img src="../../../public/Rent-a-Spot.png" alt="Home" />
+        </NavLink>
       </li>
       {isLoaded && (
-        <div id='right-justified'>
+        <div style={{marginLeft: 'auto'}}>
           {sessionUser && (<li>
             <NavLink to={'/spots/new'}>Create a New Spot</NavLink>
           </li>)}

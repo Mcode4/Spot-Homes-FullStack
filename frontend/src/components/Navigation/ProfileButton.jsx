@@ -19,8 +19,13 @@ function ProfileButton({ user }) {
   };
 
   useEffect(() => {
-    if (!showMenu) return;
+    const background = document.getElementById('profile');
+    if (!showMenu) {
+      background.style.backgroundColor = 'transparent';
+      return
+    };
 
+    background.style.backgroundColor = 'darkslategray';
     const closeMenu = (e) => {
       if (!ulRef.current.contains(e.target)) {
         setShowMenu(false);
@@ -32,7 +37,9 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const closeMenu = () => setShowMenu(false);
+  const closeMenu = () => {
+    setShowMenu(false);
+  };
 
   const logout = (e) => {
     e.preventDefault();
@@ -40,11 +47,11 @@ function ProfileButton({ user }) {
     closeMenu();
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "visible" : " hidden");
+  const ulClassName = "profile-dropdown" + (showMenu ? " visible" : " hidden");
 
   return (
     <div id='profileDiv'>
-      <button onClick={toggleMenu}>
+      <button onClick={toggleMenu} style={{width: '30px', height: '30px', borderRadius: '50%'}}>
         <FaUserCircle />
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -66,14 +73,14 @@ function ProfileButton({ user }) {
           </div>
         ) : (
           <>
-            <li>
+            <li className='login-buttons'>
               <OpenModalButton
                 buttonText="Log In"
                 onButtonClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
             </li>
-            <li>
+            <li className='login-buttons'>
               <OpenModalButton
                 buttonText="Sign Up"
                 onButtonClick={closeMenu}
