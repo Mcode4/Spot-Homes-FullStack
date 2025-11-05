@@ -1,13 +1,15 @@
 .modal{
+    display: flex;
+    flex-direction: column;
     height: 400px;
     width: 300px;
     padding: 10px;
-    display: grid;
+    /* display: grid;
     grid-template-rows: 90px 200px;
     justify-items: center;
     gap: 10px;
-    border-radius: 20px;
-    
+    border-radius: 20px; */
+
 }
 h1{
     height: 50px;
@@ -17,22 +19,32 @@ h1{
     font-weight: bold;
 }
 #loginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     height: 200px;
     width: 100%;
-    display: grid;
+    /* display: grid;
     grid-template-rows: 25px 25px 25px;
-    gap: 20px;
+    gap: 20px; */
 }
 
+label {
+    display: inline-flex;
+    width: 100%;
+    gap: 15px;
+}
 input{
     height: 25px;
+    width: 100%;
     background-color:bisque;
     border-radius: 10px;
-    font-size: 14px;
+    border: none;
 }
-.submitButton{
-    height: 50px;
-    background-color:crimson;
-    font-size: 18px;
-    font-weight: bold;
+#loginForm button{
+    height: 25px;
+    background-color:darkblue;
+    color: white;
+    border-radius: 10px;
+    border: none;
 }

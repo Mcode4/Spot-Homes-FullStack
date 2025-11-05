@@ -22,8 +22,8 @@ function ProfileButton({ user }) {
     const background = document.getElementById('profile');
     if (!showMenu) {
       background.style.backgroundColor = 'transparent';
-      return
-    };
+      return;
+    }
 
     background.style.backgroundColor = 'darkslategray';
     const closeMenu = (e) => {
@@ -58,7 +58,7 @@ function ProfileButton({ user }) {
         {user ? (
           <div className='profileInfo'>
             {/* <li>Hello {user.username}</li> */}
-            
+
             <li>Hello, {user.firstName}</li> {/*{user.lastName}*/}
             <li>{user.email}</li>
             <button>

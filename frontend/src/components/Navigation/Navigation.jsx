@@ -5,15 +5,15 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
-  
 
-  
+
+
 
   return (
     <ul id='navbar'>
       <li id='home'>
         <NavLink to="/">
-          <img src="../../../public/Rent-a-Spot.png" alt="Home" />
+          <img src="/Rent-a-Spot.png" alt="Home" />
         </NavLink>
       </li>
       {isLoaded && (

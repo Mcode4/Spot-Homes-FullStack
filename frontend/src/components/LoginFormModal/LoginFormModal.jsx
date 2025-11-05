@@ -28,20 +28,24 @@ function LoginFormModal() {
     <div className='modal'>
       <h1>Log In</h1>
       <form id='loginForm' onSubmit={handleSubmit}>
+        <label htmlFor='email'>Email:</label>
         <input
-            placeholder='Username or Email'
-            type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-        />
+              id="email"
+              placeholder='Username or Email'
+              type="text"
+              value={credential}
+              onChange={(e) => setCredential(e.target.value)}
+              required
+          />
+        <label htmlFor='password'>Password:</label>
         <input
-            placeholder='Password'
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-        />
+              id="password"
+              placeholder='Password'
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+          />
         {errors.credential && (
           <p>{errors.credential}</p>
         )}
