@@ -23,14 +23,14 @@ function SpotPage(){
     }, [dispatch, id])
 
     useEffect(()=> {
-        if(spotData) {
+        if(spotData && mapScript.length === 1) {
             for(let i = 1; i < spotData.length; i++) {
                 mapScript.push(i)
             }
             setCurrentIndex(0);
         }
 
-    }, [spotData])
+    }, [mapScript, spotData])
     useEffect(()=> {
         if(spotData) {
             const left = document.getElementById('left-arrow')
@@ -66,7 +66,7 @@ function SpotPage(){
                 }
             }
         }
-    }, [currentIndex])
+    }, [spotData, currentIndex])
 
     
     // console.log(user)
@@ -168,8 +168,8 @@ function SpotPage(){
                         <button id="right-arrow" className="arrow" onClick={()=> scrollImage('increase')}>{`>`}</button>
                     </div>
                     <div>
-                        {mapScript.map(index => (
-                            <div id="current-image" className={`current-image${index}`}>
+                        {mapScript.map((index, i) => (
+                            <div key={i} id="current-image" className={`current-image${index}`}>
                                 •
                             </div>
                         ))}
