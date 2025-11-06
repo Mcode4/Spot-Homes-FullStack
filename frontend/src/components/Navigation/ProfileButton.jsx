@@ -19,13 +19,13 @@ function ProfileButton({ user }) {
   };
 
   useEffect(() => {
-    const background = document.getElementById('profile');
+    const profile = document.getElementById('profile');
     if (!showMenu) {
-      background.style.backgroundColor = 'transparent';
+      profile.style.backgroundColor = 'transparent';
       return;
     }
 
-    background.style.backgroundColor = 'lightgray';
+    profile.style.backgroundColor = 'lightgray';
     const closeMenu = (e) => {
       if (!ulRef.current.contains(e.target)) {
         setShowMenu(false);

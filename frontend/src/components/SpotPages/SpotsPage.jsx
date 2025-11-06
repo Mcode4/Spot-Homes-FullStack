@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import * as spotActions from "../../store/spot";
 import './SpotsPage.css'
 
@@ -9,6 +9,7 @@ function SpotsPage(){
     const spotData = useSelector(state => state.spot.spots)
     // console.log('SPOTDATA', spotData)
     const sessionUser = useSelector(state => state.session.user);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         dispatch(spotActions.loadSpots())
@@ -96,16 +97,20 @@ function SpotsPage(){
         })
     }
 
+    function countryNav(value) {
+        return navigate(`/country/${value}`)
+    }
+
     
 
     return(
         <>
         <div id="country">
-            <button>United States</button>
-            <button>Canada</button>
-            <button>Europe</button>
-            <button>Asia</button>
-            <button>Other</button>
+            <button onClick={()=> countryNav('us')}>United States</button>
+            <button onClick={()=> countryNav('canada')}>Canada</button>
+            <button onClick={()=> countryNav('eu')}>Europe</button>
+            <button onClick={()=> countryNav('asia')}>Asia</button>
+            <button onClick={()=> countryNav('other')}>Other</button>
         </div>
         {sessionUser && (<li>
             <NavLink to={'/spots/new'}>
@@ -115,7 +120,7 @@ function SpotsPage(){
         <div id="holder">
             
            {spotData.map((spot)=> (
-                <NavLink to={`spots/${spot.id}`} key={spot.id}>
+                <NavLink to={`/spots/${spot.id}`} key={spot.id}>
                     <div className="container">
                             <div className="imageHolder">
                                 <img className="img" src={spot.previewImage?.url} alt="No Image Shown" />
