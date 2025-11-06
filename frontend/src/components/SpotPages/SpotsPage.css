@@ -27,6 +27,22 @@
     color: darkblue;
 }
 
+#create-spot-button {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    height: 50px;
+    width: fit-content;
+    margin-left: 10PX;
+    margin-bottom: 10PX;
+
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
 #holder {
     display: flex;
     flex-wrap: wrap;

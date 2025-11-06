@@ -51,26 +51,26 @@ function ProfileButton({ user }) {
 
   return (
     <div id='profileDiv'>
-      <button onClick={toggleMenu} style={{width: '30px', height: '30px', borderRadius: '50%'}}>
+      <button id='profile-button' onClick={toggleMenu}>
         <FaUserCircle />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <div className='profileInfo'>
+          <>
             {/* <li>Hello {user.username}</li> */}
 
             <li>Hello, {user.firstName}</li> {/*{user.lastName}*/}
             <li>{user.email}</li>
-            <button>
+            <button className='user-buttons'>
               <NavLink to={'/spots/current'}>Manage Spots</NavLink>
             </button>
-            <button>
+            <button className='user-buttons'> 
               <NavLink to={'/reviews/current'}>Manage Reviews</NavLink>
             </button>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button className='user-buttons' onClick={logout}>Log Out</button>
             </li>
-          </div>
+          </>
         ) : (
           <>
             <li className='login-buttons'>

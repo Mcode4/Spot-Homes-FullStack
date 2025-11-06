@@ -5,10 +5,6 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
-
-
-
-
   return (
     <ul id='navbar'>
       <li id='home'>
@@ -17,14 +13,9 @@ function Navigation({ isLoaded }) {
         </NavLink>
       </li>
       {isLoaded && (
-        <div style={{marginLeft: 'auto'}}>
-          {sessionUser && (<li>
-            <NavLink to={'/spots/new'}>Create a New Spot</NavLink>
-          </li>)}
           <li id='profile'>
             <ProfileButton user={sessionUser} />
           </li>
-        </div>
       )}
     </ul>
   );

@@ -8,6 +8,7 @@ function SpotsPage(){
     const dispatch = useDispatch()
     const spotData = useSelector(state => state.spot.spots)
     // console.log('SPOTDATA', spotData)
+    const sessionUser = useSelector(state => state.session.user);
 
     useEffect(()=>{
         dispatch(spotActions.loadSpots())
@@ -106,7 +107,13 @@ function SpotsPage(){
             <button>Asia</button>
             <button>Other</button>
         </div>
+        {sessionUser && (<li>
+            <NavLink to={'/spots/new'}>
+                <button id='create-spot-button'>Create a New Spot</button>
+            </NavLink>
+        </li>)}
         <div id="holder">
+            
            {spotData.map((spot)=> (
                 <NavLink to={`spots/${spot.id}`} key={spot.id}>
                     <div className="container">
