@@ -111,7 +111,7 @@ function CreateSpot(){
                     <input className="input" type="text" placeholder="Image Url" onChange={(e)=>setImage3(e.target.value)} value={image3} />
                     <input id="final-img" className="input" type="text" placeholder="Image Url" onChange={(e)=>setImage4(e.target.value)} value={image4} />
                 </div>
-                <button type="submit"><NavLink to={'/spots/current'}>Create Spot</NavLink></button>
+                <button type="submit"><NavLink style={{color: 'white'}} to={'/spots/current'}>Create Spot</NavLink></button>
             </form>
         </div>
     )
