@@ -8,17 +8,65 @@ import * as spotActions from '../../store/spot'
 import './SpotPage.css'
 
 function SpotPage(){
-    const [showMenu, setShowMenu] = useState(false)
+    const [showMenu, setShowMenu] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(-1);
     const { id }= useParams()
     const dispatch = useDispatch()
     const state = useSelector(state=> state)
     const spotData = state.spot.spotData.spotData
     const reviewData = state.spot.spotData.reviewData
     const user = state.session.user
+    let mapScript = [0]
 
     useEffect(()=>{
         dispatch(spotActions.loadSpotData(id))
     }, [dispatch, id])
+
+    useEffect(()=> {
+        if(spotData) {
+            for(let i = 1; i < spotData.length; i++) {
+                mapScript.push(i)
+            }
+            setCurrentIndex(0);
+        }
+
+    }, [spotData])
+    useEffect(()=> {
+        if(spotData) {
+            const left = document.getElementById('left-arrow')
+            const right = document.getElementById('right-arrow')
+
+            console.log('CURRENT INDEX:', currentIndex, 'SPOTDATA LENGTH', spotData.length)
+            
+            if(currentIndex === spotData.SpotImages.length - 1 && currentIndex === 0) {
+                right.disabled = true;
+                left.disabled = true;
+            }
+            else if(currentIndex === spotData.SpotImages.length - 1) {
+                right.disabled = true;
+            }
+            else if(currentIndex === 0) {
+                left.disabled = true;
+            }
+            else if(currentIndex > spotData.SpotImages.length - 1 || currentIndex < 0) {
+                setCurrentIndex(0);
+                console.error('Image not available Image was reset back to first image.')
+            } else {
+                right.disabled = false;
+                left.disabled = false;
+            }
+
+            for(let i = 0; i < spotData.SpotImages.length; i++) {
+                const element = document.querySelector(`.current-image${i}`);
+
+                if(i === currentIndex) {
+                    element.style.color = 'black';
+                } else {
+                    element.style.color = 'lightgray';
+                }
+            }
+        }
+    }, [currentIndex])
 
     
     // console.log(user)
@@ -96,81 +144,92 @@ function SpotPage(){
         setShowMenu(false)
     }
 
+    function scrollImage(action) {
+        if(action === 'increase' && currentIndex < (spotData.SpotImages.length - 1)) {
+            setCurrentIndex(i => i + 1);
+        } else if(action === 'decrease' && currentIndex > 0) {
+            setCurrentIndex(i => i - 1);
+        }
+    }
+
     console.log('IMAGES', spotData.SpotImages)
 
     return(
-        <div id="page">
-            <header>
-                <div className="hText">{spotData.name}</div>
-                <div className="nText">{`${spotData.city}, ${spotData.state}, ${spotData.country}`}</div>
-            </header>
-            <section id="s1">
-                <div id="mPic">
-                    <img src={spotData.SpotImages[0].url} alt="Main Img" className="bigImg" />
-                </div>
-                {spotData.SpotImages[1]?.url !== '' && (
-                    <div id="oPic">
-                        {spotData.SpotImages.map((image, i) => {
-                            if (i !== 0) {
-                            return <img src={image?.url} alt="Other Images" className="smallImg" key={image.id} />;
-                            }
-                            return null; // This ensures the first image is not rendered
-                        })}
+        <div>
+            <div id="page">
+                <header>
+                    <div className="hText">{spotData.name}</div>
+                    <div className="nText">{`${spotData.city}, ${spotData.state}, ${spotData.country}`}</div>
+                </header>
+                <section id="img-section">
+                    <div id="img-display">
+                        <button id="left-arrow" className="arrow" onClick={()=> scrollImage('decrease')}>{`<`}</button>
+                        <img id="spot-img" src={spotData.SpotImages[currentIndex]?.url} alt="" />
+                        <button id="right-arrow" className="arrow" onClick={()=> scrollImage('increase')}>{`>`}</button>
                     </div>
-                )}
-            </section>
-
-            <section id="s2">
-                <div>
-                    <div className="hText">Hosted by {`${spotData.Owner.firstName} ${spotData.Owner.lastName}`}</div>
-                    <div className="nText">{spotData.description}</div>
-                </div>
-
-                <div className="popupDisplay">
-                    <div className="popupInfo">
-                        <div id="price" className="hText">${spotData.price} a night</div>
-                        <div id="rating" className="shText">★{spotData.displayRating}</div>
+                    <div>
+                        {mapScript.map(index => (
+                            <div id="current-image" className={`current-image${index}`}>
+                                •
+                            </div>
+                        ))}
                     </div>
-                    <button id="reserve">Reserve</button>
-                </div>
-            </section>
-        
-            <section id="s3">
-                <div>
-                    <div className="hText" id="rating2">★{spotData.displayRating} {reviewStatement}</div>
-                </div>
-                <div>
-                    {user && <div className={modalClassName}>
-                        <OpenModalButton
-                            buttonText="Post Your Review"
-                            onButtonClick={closeMenu}
-                            modalComponent={<ReviewFormModal id={id} />}
-                        />
-                    </div>}
-                    {reviewData.Reviews && reviewData.Reviews.map((review)=> (
-                        <div id="review" key={review.id}>
-                            <div id="rName" className="shText">rName- {review.User.firstName}</div>
-                            <div id="rDate" className="nText">rData- {review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
-                            <div id="rComment" className="nText">rComment- {review.review}</div>
-                            {verify(review.User) && (
-                                <div className="reviewActions">
-                                    <OpenModalButton
-                                        buttonText="Update"
-                                        modalComponent={<ReviewFormModal id={review.id} spot={spotData} />}
-                                    />
-                                    <OpenModalButton
-                                        buttonText="Delete"
-                                        modalComponent={<DeleteFormModal id={review.id} type={'Review'} page={['Spot', id]} />}
-                                    />
-                                </div>
-                            )}
+                </section>
+
+                <section id="s2">
+                    <div>
+                        <div className="hText">Listed by {`${spotData.Owner.firstName} ${spotData.Owner.lastName}`}</div>
+                        <div className="nText">{spotData.description}</div>
+                    </div>
+
+                    <div className="popupDisplay">
+                        <div className="popupInfo">
+                            <div id="price" className="shText">${spotData.price} a day</div>
+                            <div id="rating" style={{marginLeft: 'auto'}} className="shText">★{spotData.displayRating}</div>
                         </div>
-                    ))}
-                    {!reviewData.Reviews && (
-                        <div>Be the first to post a review!</div>
-                    )}
-                </div>
-            </section>
+                        <button id="reserve">Reserve</button>
+                    </div>
+                </section>
+            
+                <section id="s3">
+                    <div id="s3-heading">
+                        <div className="hText" id="rating2">{reviewStatement}</div>
+                        {user && <div className={modalClassName} style={{marginLeft: 'auto'}}>
+                            <OpenModalButton
+                                buttonText="Post Your Review"
+                                onButtonClick={closeMenu}
+                                modalComponent={<ReviewFormModal id={id} />}
+                            />
+                        </div>}
+                    </div>
+                    <div>
+                        {reviewData.Reviews && reviewData.Reviews.map((review)=> (
+                            <div id="review" key={review.id}>
+                                <div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+                                    <div id="rName" className="snText">{review.User.firstName}</div>
+                                    <div id="rDate" className="sText">{review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
+                                </div>
+                                <div id="rComment" className="nText">rComment- {review.review}</div>
+                                {verify(review.User) && (
+                                    <div className="reviewActions" style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+                                        <OpenModalButton
+                                            buttonText="Update"
+                                            modalComponent={<ReviewFormModal id={review.id} spot={spotData} />}
+                                        />
+                                        <OpenModalButton
+                                            buttonText="Delete"
+                                            modalComponent={<DeleteFormModal id={review.id} type={'Review'} page={['Spot', id]} />}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                        {!reviewData.Reviews && (
+                            <div>Be the first to post a review!</div>
+                        )}
+                    </div>
+                </section>
+            </div>
         </div>
     )
 }

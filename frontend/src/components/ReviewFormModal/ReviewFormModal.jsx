@@ -89,11 +89,11 @@ function ReviewFormModal({ id, spot }){
             <form id="reviewForm" onSubmit={handleSubmit}>
                 <textarea id="review" onChange={(e)=> setReview(e.target.value)} value={review}></textarea>
                 <div id="stars">
-                    <div id="starButton1" onClick={()=>setStars(1)}>★</div>
-                    <div id="starButton2" onClick={()=>setStars(2)}>★</div>
-                    <div id="starButton3" onClick={()=>setStars(3)}>★</div>
-                    <div id="starButton4" onClick={()=>setStars(4)}>★</div>
-                    <div id="starButton5" onClick={()=>setStars(5)}>★</div>
+                    <div id="starButton1" className="starClass" onClick={()=>setStars(1)}>★</div>
+                    <div id="starButton2" className="starClass" onClick={()=>setStars(2)}>★</div>
+                    <div id="starButton3" className="starClass" onClick={()=>setStars(3)}>★</div>
+                    <div id="starButton4" className="starClass" onClick={()=>setStars(4)}>★</div>
+                    <div id="starButton5" className="starClass" onClick={()=>setStars(5)}>★</div>
                     Stars
                 </div>
                 {errors.review && (
@@ -102,7 +102,7 @@ function ReviewFormModal({ id, spot }){
                 {errors.stars && (
                     <p>{errors.stars}</p>
                 )}
-                <button type="submit">Submit Your Review</button>
+                <button id="review-submit" type="submit">Submit Your Review</button>
             </form>
         </div>
     )

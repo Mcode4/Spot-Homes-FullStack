@@ -1,47 +1,62 @@
+#page {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 10px;
+    justify-self: center;
+    width: 600px;
+}
+
 /* Header Elements */
 .hText{
-    font-size: 24pt;
-    font-weight: bold;
+    font-size: 18pt;
+    font-weight: bolder;
 }
 .shText{
-    font-size: 18pt;
+    font-size: 14pt;
     font-weight: bold;
 }
 .nText{
-    font-size: 14pt;
+    font-size: 10pt;
+}
+.snText{
+    font-size: 10pt;
+    font-weight: bold;
+}
+.sText {
+    font-size: 8pt;
 }
 
-
-/* Pictures */
-#s1{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+/* Image Section */
+#img-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
 }
-#mPic{
-    align-items: center;
-    justify-items: center;
-    padding: 10px;
-}
-#oPic{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    padding: 10px;
+#img-display {
+    display: flex;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.arrow {
+    height: 50px;
+    width: 50px;
+    border: none;
+    border-radius: 10px;
+    color: black;
+}
+#spot-img {
+    width: 500px
+}
+#current-image {
+    font-size: 50px;
+    color: lightgray;
 }
 
-.bigImg{
-    height: fit-content;
-    width: 450px;
-    object-fit: fill;
-}
-.smallImg{
-    height: 145px;
-    width: 225px;
-    object-fit: fill;
-}
 
 /* Spot Description */
 #s2{
@@ -49,12 +64,13 @@
     justify-self: self-start;
     display: grid;
     grid-template-columns: 1.3fr .7fr;
+    padding-bottom: 10px;
+    border-bottom: 2px solid lightgray;
 }
 .popupInfo{
-    align-content: center;
-    justify-content: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 #price{
     justify-self: self-start;
@@ -63,13 +79,19 @@
     justify-self: self-end;
 }
 #reserve{
-    width: 100%;
+    margin-left: auto;
+    height: 30px;
+    width: 200px;
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
 }
 
 .popupDisplay{
     display: grid;
     grid-template-rows: 1fr 1fr;
-    padding: 10px;
     gap: 10px;
 }
 
@@ -81,6 +103,34 @@
     grid-template-rows: 100px fit-content;
 }
 
+#s3-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 #review{
     justify-items: start;
+}
+
+#s3-heading div button {
+    height: 30px;
+    width: 150px;
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+.reviewActions button {
+    height: 25px;
+    width: 50px;
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 7pt;
 }
