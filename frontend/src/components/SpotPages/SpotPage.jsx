@@ -55,16 +55,6 @@ function SpotPage(){
                 right.disabled = false;
                 left.disabled = false;
             }
-
-            for(let i = 0; i < spotData.SpotImages.length; i++) {
-                const element = document.querySelector(`.current-image${i}`);
-
-                if(i === currentIndex) {
-                    element.style.color = 'black';
-                } else {
-                    element.style.color = 'lightgray';
-                }
-            }
         }
     }, [spotData, currentIndex])
 
@@ -169,7 +159,7 @@ function SpotPage(){
                     </div>
                     <div>
                         {mapScript.map((index, i) => (
-                            <div key={i} id="current-image" className={`current-image${index}`}>
+                            <div key={i} style={{fontSize: '50px', color : index === currentIndex ? 'black' : 'lightgray'}} className={`current-image${index}`}>
                                 •
                             </div>
                         ))}
