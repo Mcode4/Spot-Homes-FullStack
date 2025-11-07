@@ -27,7 +27,7 @@
     color: darkblue;
 }
 
-#create-spot-button {
+.create-spot-button {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -43,7 +43,7 @@
     border: none;
 }
 
-#holder {
+.spots-page {
     display: flex;
     flex-wrap: wrap;
 

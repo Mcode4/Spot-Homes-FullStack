@@ -1,6 +1,7 @@
 #createPage {
     display: flex;
     justify-content: center;
+    align-self: center;
 }
 
 #createPage form div input {

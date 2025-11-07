@@ -29,14 +29,21 @@ function ManageReviews(){
     
     return (
         <div id="reviewPage">
-            <div>Manage Reviews</div>
+            <div className="title" style={{marginBottom : '10px', marginLeft: '10px'}}>Manage Reviews</div>
 
-            <div className="reviewContainer">
+            <div className="spots-page">
                 {reviews.map(review=>(
-                    <div className="reviews" key={review.id}>
-                        <div>{review.Spot.name}</div>
-                        <div>{review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
-                        <div>{review.review}</div>
+                    <div className="container" key={review.id}>
+                        <div className="imageHolder">
+                            <img className="img" src={review.Spot.previewImage[0]?.url} alt="No Image Shown" />
+                        </div>
+                        <div className='info' style={{display: 'flex', gap: '5px'}}>
+                            <div>{review.Spot.name}</div>
+                            <div>{review.createdAt.split('-')[1]} {review.createdAt.split('-')[0]}</div>
+                            <div style={{ marginLeft: 'auto', color: 'yellow', WebkitTextStroke: '.05px black' }}>★</div>
+                            <div style={{color: 'yellow', WebkitTextStroke: '.5px black', fontWeight: 'bolder' }}>{review.stars}</div>
+                        </div>
+                        <div>" {review.review} "</div>
                         <div className="reviewActions">
                             <OpenModalButton
                                 buttonText="Update"

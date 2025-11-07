@@ -60,15 +60,25 @@ function ManageSpots(){
     return (
         <div id="ManagePage">
             <div>
-                <div>Manage Your Spots</div>
-                <button>
-                    <NavLink to={'/spots/new'}>Create a New Spot</NavLink>
-                </button>
+                <div className="title" style={{marginBottom : '10px', marginLeft: '10px'}}>Manage Your Spots</div>
+                <NavLink to={'/spots/new'}>
+                    <button className="create-spot-button">Create a New Spot</button>
+                </NavLink>
             </div>
-            <div id="manageContainer">
+            <div className="spots-page">
                 {userSpots?.map((spot)=> (
-                    <div className="spots" key={spot.id}>
-                        <NavLink to={`/spots/${spot.id}`} className='spotHolder'>
+                    <div className="container" key={spot.id}>
+                        <div className="imageHolder">
+                            <img className="img" src={spot.previewImage} alt="No Image Shown" />
+                        </div>
+                        <div className="info">
+                            <div>{spot.name}</div>
+                            {spot.avgRating !== 0 && (<div style={{ marginLeft: 'auto', color: 'yellow', WebkitTextStroke: '.05px black' }}>★</div>)}
+                            <div style={{color: 'yellow', WebkitTextStroke: '.5px black', fontWeight: 'bolder' }}>{spot.displayRating}</div>
+                        </div>
+                        <div>{`${spot.city}, ${spot.state}`}</div>
+                        <div>${spot.price}/day</div>
+                        {/* <NavLink to={`/spots/${spot.id}`} className='spotHolder'>
                             <div className="imgContainer">
                                 <img src={spot.previewImage} alt="No Image" className="img" />
                             </div>
@@ -81,7 +91,7 @@ function ManageSpots(){
                                     <div>${spot.price} a night</div>
                                 </div>
                             </div>
-                        </NavLink>
+                        </NavLink> */}
                         <div className="spotActions">
                             <button><NavLink to={`/spots/${spot.id}/edit`}>Update</NavLink></button>
                             <OpenModalButton

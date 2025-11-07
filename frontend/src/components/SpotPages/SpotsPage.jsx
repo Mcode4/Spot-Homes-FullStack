@@ -114,10 +114,10 @@ function SpotsPage(){
         </div>
         {sessionUser && (<li>
             <NavLink to={'/spots/new'}>
-                <button id='create-spot-button'>Create a New Spot</button>
+                <button className="create-spot-button">Create a New Spot</button>
             </NavLink>
         </li>)}
-        <div id="holder">
+        <div id="holder" className="spots-page">
             
            {spotData.map((spot)=> (
                 <NavLink to={`/spots/${spot.id}`} key={spot.id}>

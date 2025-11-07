@@ -1,3 +1,23 @@
+.spotActions {
+    display: flex;
+    gap: 5px;
+}
+
+.spotActions button {
+    height: 25px;
+    width: 50px;
+    background-color: darkblue;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 7pt;
+}
+
+.spotActions button a {
+    color: white;
+}
+
 #ManagePage{
     height: 100%;
     width: 1000px;
