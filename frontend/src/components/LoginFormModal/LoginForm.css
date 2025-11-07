@@ -1,7 +1,7 @@
 .modal{
     display: flex;
     flex-direction: column;
-    height: 400px;
+    min-height: 400px;
     width: 300px;
     padding: 10px;
     /* display: grid;
@@ -22,7 +22,7 @@ h1{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 200px;
+    min-height: 200px;
     width: 100%;
     /* display: grid;
     grid-template-rows: 25px 25px 25px;
@@ -48,4 +48,7 @@ label {
     border-radius: 10px;
     border: none;
     text-align: center;
+}
+.demoUser {
+    height: 50px;
 }

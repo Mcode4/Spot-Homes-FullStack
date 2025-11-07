@@ -20,6 +20,10 @@ function LoginFormModal() {
         const data = await res.json();
         if (data && data.errors) {
           setErrors(data.errors);
+        } else {
+          setErrors({
+            failed: 'Login failed, please check credentials and try again'
+          });
         }
       });
   };
@@ -32,7 +36,7 @@ function LoginFormModal() {
         <input
               id="login-email"
               placeholder='Username or Email'
-              type="text"
+              type="email"
               value={credential}
               onChange={(e) => setCredential(e.target.value)}
               required
@@ -49,6 +53,9 @@ function LoginFormModal() {
         {errors.credential && (
           <p>{errors.credential}</p>
         )}
+        {errors.failed && (
+            <p>{errors.failed}</p>
+          )}
         <button className='submitButton' type="submit">Log In</button>
         <button className='demoUser' type="submit" onClick={()=>{
           setCredential('demo@user.io')
