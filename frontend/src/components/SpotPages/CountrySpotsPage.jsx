@@ -118,7 +118,7 @@ function CountrySpotsPage(){
         </li>)}
         <div id="holder" className="spots-page">
             
-           {spotData.map((spot)=> (
+           {countrySpots && countrySpots.map((spot)=> (
                 <NavLink to={`/spots/${spot.id}`} key={spot.id}>
                     <div className="container">
                             <div className="imageHolder">
@@ -126,7 +126,11 @@ function CountrySpotsPage(){
                             </div>
                             <div className="info">
                                 <div>{spot.name}</div>
-                                {spot.avgRating !== 0 && (<div style={{ marginLeft: 'auto', color: 'yellow', WebkitTextStroke: '.05px black' }}>★</div>)}
+                                {spot.avgRating !== 0 ? 
+                                    (<div style={{ marginLeft: 'auto', color: 'yellow', WebkitTextStroke: '.05px black' }}>★</div>
+                                    ) : (
+                                        <div style={{marginLeft: 'auto'}}></div>
+                                    )}
                                 <div style={{color: 'yellow', WebkitTextStroke: '.5px black', fontWeight: 'bolder' }}>{spot.displayRating}</div>
                             </div>
                             <div>{`${spot.city}, ${spot.state}`}</div>

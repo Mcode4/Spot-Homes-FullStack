@@ -10,13 +10,15 @@ import './SpotPage.css'
 function SpotPage(){
     const [showMenu, setShowMenu] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(-1);
-    const { id }= useParams()
+    const { id } = useParams()
     const dispatch = useDispatch()
     const state = useSelector(state=> state)
     const spotData = state.spot.spotData.spotData
     const reviewData = state.spot.spotData.reviewData
     const user = state.session.user
     let mapScript = [0]
+
+    console.log('ID', id)
 
     useEffect(()=>{
         dispatch(spotActions.loadSpotData(id))

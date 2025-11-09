@@ -399,14 +399,14 @@ router.post('/:spotId/reviews', async (req,res)=>{
         }
     //   console.log("foundSpot.review",foundSpot.review);
 
-        foundSpot.Reviews.forEach(el=>{
-            if(el.userId===user.id) {
-     res.status(500);
-                return res.json({
-                      "message":
-            "User already has a review for this spot"})
-            }
-        })
+    //     foundSpot.Reviews.forEach(el=>{
+    //         if(el.userId===user.id) {
+    //  res.status(500);
+    //             return res.json({
+    //                   "message":
+    //         "User already has a review for this spot"})
+    //         }
+    //     })
            
             
   

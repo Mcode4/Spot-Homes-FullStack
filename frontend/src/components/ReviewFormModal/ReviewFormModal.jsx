@@ -9,7 +9,7 @@ function ReviewFormModal({ id, spot }){
     console.log(`ID: ${id}, SPOT: ${spot}`)
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0)
-    let errors = {}
+    const [errors, setErrors] = useState({});
     const {closeModal} = useModal()
     const dispatch = useDispatch()
 
@@ -45,6 +45,8 @@ function ReviewFormModal({ id, spot }){
     },[stars])
 
     if(spot && !reviewData){
+        console.log('REVIEWDATA NOT SHOWING ', 'ID:', id, '- 1')
+        useSelector(state=> console.log(state.review))
         return (
             <h1>Review Loading...</h1>
         )
@@ -53,12 +55,12 @@ function ReviewFormModal({ id, spot }){
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-        errors = {}
+        setErrors({})
         if(stars <= 0){
-            errors.stars = 'Must include a rating'
+            setErrors({stars: 'Must include a rating'});
         }
         if(review === ''){
-            errors.review = 'Must include a description'
+            setErrors({review : 'Must include a description'});
         }
         // console.log('ERRORS', errors)
         // console.log('REVIEW', {review, stars})
@@ -67,17 +69,31 @@ function ReviewFormModal({ id, spot }){
         if(Object.keys(errors).length > 0) return
 
         if(!spot){
-            return dispatch(reviewActions.postReview({
-                id,
-                review,
-                stars
-            })).then(dispatch(spotActions.loadSpotData(id))).then(closeModal)
+            return dispatch(reviewActions.postReview({id, review, stars}))
+                .then(dispatch(spotActions.loadSpotData(id)))
+                .then(closeModal)
+                .catch(async (res)=> {
+                    const data = await res.json();
+                    if(data && data.errors) {
+                        console.log('ERROR', data.errors)
+                    } else {
+                        console.log('DATA', data)
+                    }
+                })
+
+            // .then(dispatch(spotActions.loadSpotData(id))).then(closeModal)
         } else{
-            return dispatch(reviewActions.editReview({
-                id,
-                review,
-                stars
-            })).then(dispatch(spotActions.loadSpotData(spot.id))).then(closeModal)
+            return dispatch(reviewActions.editReview({id, review, stars}))
+                .then(dispatch(spotActions.loadSpotData(id)))
+                .then(closeModal)
+                .catch(async (res)=> {
+                    const data = await res.json();
+                    if(data && data.errors) {
+                        console.log('ERROR', data.errors)
+                    } else {
+                        console.log('DATA', data)
+                    }
+                })
         }
         
             

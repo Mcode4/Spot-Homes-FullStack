@@ -46,7 +46,16 @@ function CreateSpot(){
         // address, city, state, country, lat, lng, name,description, price
         console.log('FORM', form)
 
-        dispatch(spotActions.createSpot(form)).then(spotActions.loadCurrentSpots())
+        dispatch(spotActions.createSpot(form))
+        .then(spotActions.loadCurrentSpots())
+        .then(navigate('/'))
+        .catch((res)=> {
+            const data = res.json();
+
+            if(data && data.error) {
+                console.log('ERROR', data.error);
+            }
+        })
     }
     return (
         <div id="createPage">
@@ -76,11 +85,11 @@ function CreateSpot(){
                     </div>
                     <div>
                         <label htmlFor="">Lattitude</label>
-                        <input type="text" className="input" placeholder="Lattitude" onChange={(e)=>setLat(e.target.value)} value={lat} />
+                        <input type="number" className="input" placeholder="Lattitude" onChange={(e)=>setLat(e.target.value)} value={lat} />
                     </div>
                     <div>
                         <label htmlFor="">Langitude</label>
-                        <input type="text" className="input" placeholder="Langitude" onChange={(e)=>setLng(e.target.value)} value={lng} />
+                        <input type="number" className="input" placeholder="Langitude" onChange={(e)=>setLng(e.target.value)} value={lng} />
                     </div>
                 </div>
 
@@ -99,7 +108,7 @@ function CreateSpot(){
                 <div id="setPrice" className="formOption2">
                     <div className="subtitle">Set a base price for your spot</div>
                     <div>Competitive pricing can help your listing stand out and rank higher in search results.</div>
-                    <div required className="priceInputDiv">$ <input className="input" type="text"  placeholder="Price per night" onChange={(e)=>setPrice(e.target.value)} value={price} /></div>
+                    <div required className="priceInputDiv">$ <input className="input" type="number"  placeholder="Price per night" onChange={(e)=>setPrice(e.target.value)} value={price} min={1} /></div>
                 </div>
                 
                 <div className="subtitle">Liven up your spot with photos</div>
