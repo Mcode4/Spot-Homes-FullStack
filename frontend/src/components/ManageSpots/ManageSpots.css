@@ -19,8 +19,6 @@
 }
 
 #ManagePage{
-    height: 100%;
-    width: 1000px;
     display: grid;
     grid-template-rows: 100px fit-content;
     gap: 20px;
